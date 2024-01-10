@@ -49,7 +49,7 @@ component "api_gateway" {
 } */
 
 component "vpc" {
-  for_each = var.region
+  for_each = var.regions
 
   source = "./aws-vpc"
 
