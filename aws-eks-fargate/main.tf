@@ -2,7 +2,6 @@ locals {
 
   tags = {
     Blueprint  = var.cluster_name
-    GithubRepo = "github.com/aws-ia/terraform-aws-eks-blueprints"
   }
 }
 
