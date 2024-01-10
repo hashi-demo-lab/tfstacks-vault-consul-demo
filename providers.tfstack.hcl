@@ -4,11 +4,6 @@ required_providers {
     version = "~> 5.7.0"
   }
 
-   random = {
-    source  = "hashicorp/random"
-    version = "~> 3.5.1"
-  }
-
 }
 
 provider "aws" "configurations" {
@@ -23,6 +18,4 @@ provider "aws" "configurations" {
     }
   }
 }
-
-provider "random" "this" {}
 

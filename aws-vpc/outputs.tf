@@ -7,4 +7,3 @@ output "private_subnets" {
   description = "private subnet ids"
   value       = module.vpc.private_subnets
 }
-
