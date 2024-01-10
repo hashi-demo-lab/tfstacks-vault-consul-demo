@@ -62,3 +62,19 @@ component "vpc" {
     aws     = provider.aws.configurations[each.value]
   }
 }
+
+
+component "eks" {
+  for_each = var.regions
+
+  source = "./aws-eks-fargate"
+
+  inputs = {
+    vpc_id = component.vpc[each.value].vpc_id
+    private_subnets = component.vpc[each.value].private_subnets 
+  }
+
+  providers = {
+    aws    = provider.aws.configurations[each.value]
+  }
+}
