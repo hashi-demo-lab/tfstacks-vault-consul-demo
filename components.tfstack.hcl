@@ -61,5 +61,6 @@ component "vpc" {
 
   providers = {
     aws     = provider.aws.configurations[each.value]
+    random = provider.random.this
   }
 }
