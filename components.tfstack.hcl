@@ -47,3 +47,19 @@ component "api_gateway" {
     random = provider.random.this
   }
 } */
+
+component "vpc" {
+  for_each = var.regions
+
+  source = "./aws-vpc"
+
+  inputs = {
+    region    = each.value
+    vpc_name = var.vpc_name
+    vpc_cidr = var.vpc_cidr
+  }
+
+  providers = {
+    aws     = provider.aws.configurations[each.value]
+  }
+}
