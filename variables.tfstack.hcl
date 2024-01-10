@@ -1,5 +1,5 @@
 variable "region" {
-  type = string
+  type = set(string)
 }
 
 variable "identity_token_file" {
