@@ -48,4 +48,20 @@ component "eks" {
 
 
 git source failing
- source = "github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0"
+component "eks" {
+  for_each = var.regions
+  source = "github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
+}
+
+Error: Cannot install source package
+Error installing git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0.git: failed to fetch package: failed resolving revision: reference not found.
+Error: Error preparing response
+Opening source bundle failed: cannot read manifest: open /home/tfc-agent/.tfc-agent/component/stack_prepare/job2341861190/src/terraform-sources.json: no such file or directory
+
+
+
+git source failing
+component "eks" {
+  for_each = var.regions
+  source = "github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0"
+}
