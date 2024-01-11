@@ -67,7 +67,7 @@ component "vpc" {
 component "eks" {
   for_each = var.regions
 
-  source = "./aws-eks-fargate"
+  source = "github.com/hashi-demo-lab/tfstacks-vault-consul-demo//aws-eks-fargate"
 
   inputs = {
     vpc_id = component.vpc[each.value].vpc_id
