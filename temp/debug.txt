@@ -37,3 +37,15 @@
 }
         
   
+
+git source working
+
+component "eks" {
+  for_each = var.regions
+
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
+
+
+
+git source failing
+ source = "github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0"
