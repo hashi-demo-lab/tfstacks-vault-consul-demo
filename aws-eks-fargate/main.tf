@@ -7,7 +7,7 @@ locals {
 
 
 module "eks" {
-  source  = "git::https://github.com/hashi-demo-lab/terraform-aws-eks.git?ref=v19.21.0"
+  source  = "git::https://github.com/hashi-demo-lab/terraform-aws-eks.git?ref=v19.21.1"
 
 
   cluster_name                   = var.cluster_name
