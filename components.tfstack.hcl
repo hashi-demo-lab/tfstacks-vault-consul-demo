@@ -67,7 +67,7 @@ component "vpc" {
 component "eks" {
   for_each = var.regions
 
-  source = "github.com/hashi-demo-lab/terraform-tfe-variable-sets.git?ref=v0.5.0"
+  source = "git::https://github.com/terraform-aws-modules/terraform-aws-eks.git?ref=v19.21.0"
 
   inputs = {
     vpc_id = component.vpc[each.value].vpc_id
