@@ -7,7 +7,7 @@ locals {
 
 
 module "eks" {
-  source  = "github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0"
+  source  = "git::https://github.com/hashi-demo-lab/terraform-aws-eks/terraform-aws-eks.git"
 
   cluster_name                   = var.cluster_name
   cluster_version                = var.kubernetes_version   #"1.27" 

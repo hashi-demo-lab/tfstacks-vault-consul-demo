@@ -67,7 +67,7 @@ component "vpc" {
 component "eks" {
   for_each = var.regions
 
-  source = "github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0"
+  source = "./aws-eks-fargate"
 
   inputs = {
     vpc_id = component.vpc[each.value].vpc_id
