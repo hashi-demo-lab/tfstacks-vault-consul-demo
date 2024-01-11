@@ -18,5 +18,9 @@ variable "vpc_cidr" {
   type = string
 }
 
+variable "kubernetes_version" {
+  type = string 
+}
+
 
 
