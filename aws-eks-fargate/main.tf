@@ -5,14 +5,9 @@ locals {
   }
 }
 
-provider "aws" {
-  region = var.region
-}
-
 
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.16"
+  source  = github.com/terraform-aws-modules/terraform-aws-eks?ref=v19.21.0
 
   cluster_name                   = var.cluster_name
   cluster_version                = var.kubernetes_version   #"1.27" 
@@ -40,12 +35,6 @@ module "eks" {
       ]
     }
   }
-
-  /*   fargate_profile_defaults = {
-    iam_role_additional_policies = {
-      additional = module.eks_blueprints_addons.fargate_fluentbit.iam_policy[0].arn
-    }
-  } */
 
   tags = local.tags
 }
