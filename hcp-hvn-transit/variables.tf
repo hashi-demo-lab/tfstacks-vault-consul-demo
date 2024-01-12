@@ -1,4 +1,4 @@
-variable "region" {
+variable "hcp_region" {
   description = "HCP HVN region"
   type        = string
   default     = "ap-southeast-1"

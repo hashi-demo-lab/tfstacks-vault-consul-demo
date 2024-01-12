@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 provider "hcp" {
   project_id = var.hcp_project_id
 }
@@ -9,7 +5,7 @@ provider "hcp" {
 resource "hcp_hvn" "hvn" {
   hvn_id         = var.deployment_id
   cloud_provider = "aws"
-  region         = var.region
+  region         = var.hcp_region
   cidr_block     = var.hvn_cidr
 }
 
@@ -37,6 +33,7 @@ resource "hcp_aws_transit_gateway_attachment" "tgw" {
   resource_share_arn            = aws_ram_resource_share.hvn.arn
 }
 
+# Need to update to handle multiple subnets/VPCs
 resource "hcp_hvn_route" "route" {
   hvn_link         = hcp_hvn.hvn.self_link
   hvn_route_id     = "${var.deployment_id}"
@@ -54,6 +51,7 @@ module "tgw" {
   ram_allow_external_principals          = true
   ram_principals                         = [hcp_hvn.hvn.provider_account_id]
 
+# Need to handle multiple VPCs
   vpc_attachments = {
     vpc1 = {
       vpc_id       = var.vpc_id
@@ -66,4 +64,4 @@ resource "aws_route" "hcp_hvn_route" {
   route_table_id            = var.route_table_id
   destination_cidr_block    = var.hvn_cidr
   transit_gateway_id        = module.tgw.ec2_transit_gateway_id
-}
+} 

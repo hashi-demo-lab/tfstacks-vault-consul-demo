@@ -19,8 +19,20 @@ variable "vpc_cidr" {
 }
 
 variable "kubernetes_version" {
-  type = string 
+  type = string
+  default = "1.28"
 }
 
+variable "deployment_id" {
+  type = string
+  default = "hvn-tfstacks"
+}
 
+variable "hvn_cidr" {
+  type = string
+}
+
+variable "aws_vpc_cidr" {
+  type = string
+}
 
