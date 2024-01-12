@@ -62,8 +62,8 @@ module "tgw" {
   }
 }
 
-/* resource "aws_route" "hcp_hvn_route" {
-  route_table_id            = module.vpc.public_route_table_ids[0]
-  destination_cidr_block    = var.hcp_hvn_cidr
+resource "aws_route" "hcp_hvn_route" {
+  route_table_id            = var.route_table_id
+  destination_cidr_block    = var.hvn_cidr
   transit_gateway_id        = module.tgw.ec2_transit_gateway_id
-} */
+}

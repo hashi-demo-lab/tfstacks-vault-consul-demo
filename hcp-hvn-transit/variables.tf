@@ -22,6 +22,11 @@ variable "private_subnets" {
   default = [ "subnet-0306e705f62f67993" ]
 }
 
+variable "route_table_id" {
+  description = "AWS Route table ID"
+  type        = string
+}
+
 variable "deployment_id" {
   description = "Deployment id"
   type        = string
