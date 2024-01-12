@@ -34,7 +34,7 @@ component "eks" {
     tls = provider.tls.this
   }
 }
-
+#
 #HCP Transit - HVN Componet
 
 #HCP CONSUL Component

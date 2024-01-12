@@ -5,6 +5,22 @@ resource "hcp_hvn" "hvn" {
   cidr_block     = var.cidr
 }
 
+resource "aws_ram_resource_share" "hvn" {
+  name                      = "hvn-resource-share"
+  allow_external_principals = true
+}
+
+resource "aws_ram_principal_association" "example" {
+  resource_share_arn = aws_ram_resource_share.hvn.arn
+  principal          = hcp_hvn.main.provider_account_id
+}
+
+resource "aws_ram_resource_association" "example" {
+  resource_share_arn = aws_ram_resource_share.hvn.arn
+  resource_arn       = module.tgw.ec2_transit_gateway_arn
+}
+
+
 resource "hcp_aws_transit_gateway_attachment" "tgw" {
   depends_on = [
     var.aws_ram_resource_share_arn
@@ -22,3 +38,28 @@ resource "hcp_hvn_route" "route" {
   destination_cidr = var.aws_vpc_cidr
   target_link      = hcp_aws_transit_gateway_attachment.tgw.self_link
 }
+
+module "tgw" {
+  source  = "terraform-aws-modules/transit-gateway/aws"
+  version = "2.8.0"
+
+  name        = var.deployment_id
+
+  enable_auto_accept_shared_attachments  = true
+  ram_allow_external_principals          = true
+  ram_principals                         = [hcp_hvn.hvn.provider_account_id]
+
+  vpc_attachments = {
+    vpc1 = {
+      vpc_id       = var.vpc_id
+      subnet_ids   = var.private_subnets
+    }
+  }
+
+}
+
+/* resource "aws_route" "hcp_hvn_route" {
+  route_table_id            = module.vpc.public_route_table_ids[0]
+  destination_cidr_block    = var.hcp_hvn_cidr
+  transit_gateway_id        = module.tgw.ec2_transit_gateway_id
+} */
