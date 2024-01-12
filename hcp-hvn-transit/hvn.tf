@@ -1,8 +1,16 @@
+provider "aws" {
+  region = var.region
+}
+
+provider "hcp" {
+  project_id = var.hcp_project_id
+}
+
 resource "hcp_hvn" "hvn" {
   hvn_id         = var.deployment_id
   cloud_provider = "aws"
   region         = var.region
-  cidr_block     = var.cidr
+  cidr_block     = var.hvn_cidr
 }
 
 resource "aws_ram_resource_share" "hvn" {
@@ -12,7 +20,7 @@ resource "aws_ram_resource_share" "hvn" {
 
 resource "aws_ram_principal_association" "example" {
   resource_share_arn = aws_ram_resource_share.hvn.arn
-  principal          = hcp_hvn.main.provider_account_id
+  principal          = hcp_hvn.hvn.provider_account_id
 }
 
 resource "aws_ram_resource_association" "example" {
@@ -22,14 +30,11 @@ resource "aws_ram_resource_association" "example" {
 
 
 resource "hcp_aws_transit_gateway_attachment" "tgw" {
-  depends_on = [
-    var.aws_ram_resource_share_arn
-  ]
 
   hvn_id                        = hcp_hvn.hvn.hvn_id
-  transit_gateway_attachment_id = "${var.deployment_id}"
-  transit_gateway_id            = var.aws_tgw_id
-  resource_share_arn            = var.aws_ram_resource_share_arn
+  transit_gateway_attachment_id = var.deployment_id
+  transit_gateway_id            = module.tgw.ec2_transit_gateway_id
+  resource_share_arn            = aws_ram_resource_share.hvn.arn
 }
 
 resource "hcp_hvn_route" "route" {
@@ -55,7 +60,6 @@ module "tgw" {
       subnet_ids   = var.private_subnets
     }
   }
-
 }
 
 /* resource "aws_route" "hcp_hvn_route" {
