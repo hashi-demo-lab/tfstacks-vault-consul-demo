@@ -35,9 +35,10 @@ component "eks" {
   }
 }
 
+#HCP Transit - HVN Componet
+
 #HCP CONSUL Component
 
+# Deploy Consul to EKS - Helm and K8s
 
-#HCP Transit - HVN
-
-
+# Deploy Hashicups K8s
