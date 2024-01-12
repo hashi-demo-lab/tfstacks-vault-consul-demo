@@ -1,6 +1,6 @@
-provider "hcp" {
+/* provider "hcp" {
   project_id = var.hcp_project_id
-}
+} */
 
 resource "hcp_hvn" "hvn" {
   hvn_id         = var.deployment_id

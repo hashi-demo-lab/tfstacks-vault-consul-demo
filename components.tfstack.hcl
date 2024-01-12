@@ -65,17 +65,21 @@ component "hcphvn" {
   inputs = {
     hcp_project_id = var.hcp_project_id
     hcp_region = var.hcp_region
-    #need to properly handle multiple vpc's
+
+    #need to handle multiple vpc's
     vpc_id = component.vpc[var.hcp_region].vpc_id
     private_subnets = component.vpc[var.hcp_region].private_subnets
+    route_table_id = component.vpc[var.hcp_region].route_table_id
     deployment_id = var.deployment_id
     hvn_cidr = var.hvn_cidr
+
+    #need to handle multiple vpc's
     aws_vpc_cidr = var.vpc_cidr
   }
 
   providers = {
     aws    = provider.aws.configurations[each.value]
-    hcp    = provider.hcp.this
+    hcp    = provider.hcp.configuration
   }
 }
 

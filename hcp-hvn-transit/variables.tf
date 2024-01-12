@@ -4,11 +4,11 @@ variable "hcp_region" {
   default     = "ap-southeast-1"
 }
 
-variable "hcp_project_id" {
+/* variable "hcp_project_id" {
   description = "HCP Project ID"
   type        = string
   default     = "b1b0b041-fc8d-4d11-9929-8a225d1e3ee6"
-}
+} */
 
 variable "vpc_id" {
   description = "VPC ID"

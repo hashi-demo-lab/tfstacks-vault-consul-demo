@@ -4,6 +4,11 @@ required_providers {
     version = "~> 5.0"
   }
 
+  hcp = {
+    source  = "hashicorp/hcp"
+    version = "~> 0.80.0"
+  }
+
   cloudinit = {
     source  = "hashicorp/cloudinit"
     version = "~> 2.0"
@@ -36,6 +41,20 @@ provider "aws" "configurations" {
       role_arn                = var.role_arn
       web_identity_token_file = var.identity_token_file
     }
+  }
+}
+
+
+
+provider "hcp" "configuration" {
+
+  config {
+    project_id = var.hcp_project_id
+
+    assume_role_with_web_identity {
+      web_identity_token_file = var.identity_token_file
+    }
+    
   }
 }
 
