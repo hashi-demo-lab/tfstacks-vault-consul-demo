@@ -8,8 +8,6 @@ identity_token "hcp" {
 }
 
 
-
-
 deployment "development" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
@@ -18,12 +16,17 @@ deployment "development" {
     vpc_name = "eks-vpc-dev2"
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
-    # HVN specific
+    # HCP HVN specific
     workload_idp_name = "iam/project/b1b0b041-fc8d-4d11-9929-8a225d1e3ee6/service-principal/tfstacks-hcp/workload-identity-provider/tfstacks-workload-identity-provider"
     hcp_identity_token_file = identity_token.hcp.jwt_filename
     hcp_region = "ap-southeast-1"
     hcp_project_id = "b1b0b041-fc8d-4d11-9929-8a225d1e3ee6"
     deployment_id = "hvn-tfstacks"
     hvn_cidr = "172.31.0.0/16"
+    # HCP Consul Specific
+    consul_deployment_name = "tfstacks-consul"
+    consul_tier = "development"
+    consul_min_version = "1.16.4"
+    
   }
 }

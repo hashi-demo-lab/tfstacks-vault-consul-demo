@@ -35,7 +35,6 @@ component "eks" {
 }
 
 # HCP HVN and AWS Transit Gateway
-
 component "hcphvn" {
 
   source = "./hcp-hvn-transit"
@@ -61,7 +60,23 @@ component "hcphvn" {
 
 }
 
-#HCP CONSUL Component
+# HCP CONSUL Component
+component "hcp-consul" {
+
+  source = "./hcp-consul"
+
+  inputs = {
+    deployment_name = var.consul_deployment_name
+    hvn_id = component.hcphvn.hvn_id
+    tier = var.consul_tier
+    min_version = var.consul_min_version
+  }
+
+  providers = {
+    hcp    = provider.hcp.configuration
+  }
+
+}
 
 # Deploy Consul to EKS - Helm and K8s
 

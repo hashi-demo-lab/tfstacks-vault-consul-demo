@@ -53,3 +53,17 @@ variable "aws_vpc_cidr" {
   type = string
 }
 
+variable "consul_deployment_name" {
+  type = string
+  default = "tfstacks-consul"
+}
+
+variable "consul_tier" {
+  type = string
+  default = "development"
+}
+
+variable "consul_min_version" {
+  type = string
+  default = "1.16.4"
+}
