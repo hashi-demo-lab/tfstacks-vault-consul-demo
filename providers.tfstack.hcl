@@ -57,7 +57,7 @@ provider "hcp" "configuration" {
   }
 }
 
-provider "kubernetes" "configuration" {
+provider "kubernetes" "configurations" {
   for_each = var.regions
   config { 
     host                   = component.eks[each.value].cluster_endpoint
