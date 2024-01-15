@@ -46,7 +46,7 @@ component "hcphvn" {
     #need to handle multiple vpc's
     vpc_id = component.vpc[var.hcp_region].vpc_id
     private_subnets = component.vpc[var.hcp_region].private_subnets
-    route_table_id = component.vpc[var.hcp_region].route_table_id
+    route_table_id = component.vpc[var.hcp_region].route_table_id[0]
     deployment_id = var.deployment_id
     hvn_cidr = var.hvn_cidr
 

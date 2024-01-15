@@ -18,7 +18,6 @@ deployment "development" {
     vpc_name = "eks-vpc-dev2"
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
-    
     # HVN specific
     hcp_identity_token_file = identity_token.hcp.jwt_filename
     hcp_region = "ap-southeast-1"
