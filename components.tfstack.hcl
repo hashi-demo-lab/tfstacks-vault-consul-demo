@@ -56,7 +56,7 @@ component "hcphvn" {
   }
 
   providers = {
-    aws    = provider.aws.configurations[each.value]
+    aws    = provider.aws.configurations[var.hcp_region]
     hcp    = provider.hcp.configuration
   }
 
