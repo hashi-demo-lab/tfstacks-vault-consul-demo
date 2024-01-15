@@ -49,7 +49,7 @@ provider "hcp" "configuration" {
   config {
     project_id = var.hcp_project_id
 
-    assume_role_with_web_identity {
+    workload_identity {
       resource_name = var.workload_idp_name
       token_file = var.hcp_identity_token_file
     }
