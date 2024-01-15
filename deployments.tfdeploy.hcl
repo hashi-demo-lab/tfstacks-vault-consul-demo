@@ -19,6 +19,7 @@ deployment "development" {
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
     # HVN specific
+    workload_idp_name = "tfstacks-workload-identity-provider"
     hcp_identity_token_file = identity_token.hcp.jwt_filename
     hcp_region = "ap-southeast-1"
     hcp_project_id = "b1b0b041-fc8d-4d11-9929-8a225d1e3ee6"
