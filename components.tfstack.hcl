@@ -78,6 +78,28 @@ component "hcp-consul" {
 
 }
 
+# Create K8s Namespace
+
+component "k8s-namespace" {
+  for_each = var.regions
+
+  source = "./test-k8s-namespace"
+
+  inputs = {
+    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
+    cluster_name = component.eks[each.value].cluster_name
+    cluster_namespace = var.cluster_namespace
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.this
+  }
+
+}
+
 # Deploy Consul to EKS - Helm and K8s
+
+
 
 # Deploy Hashicups K8s

@@ -67,3 +67,8 @@ variable "consul_min_version" {
   type = string
   default = "1.16.4"
 }
+
+variable "cluster_namespace" {
+  type = string
+  default = "tfstacks-namespace"
+}
