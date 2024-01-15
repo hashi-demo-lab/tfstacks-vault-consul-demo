@@ -1,4 +1,4 @@
-output "id" {
+output "hvn_id" {
   description = "HVN id"
   value       = hcp_hvn.hvn.hvn_id
 }
