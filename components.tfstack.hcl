@@ -100,8 +100,7 @@ component "k8s-namespace" {
 
 }
 
-# Deploy Consul to EKS - Helm and K8s
-
+# Helm Install Consul
 
 
 # Deploy Hashicups K8s
