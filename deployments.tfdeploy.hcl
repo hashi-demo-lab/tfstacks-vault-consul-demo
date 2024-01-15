@@ -27,6 +27,7 @@ deployment "development" {
     consul_deployment_name = "tfstacks-consul-dev"
     consul_tier = "development"
     consul_min_version = "1.17.1"
+    cluster_namespace = "tfstacks-namespace"
     
   }
 }
