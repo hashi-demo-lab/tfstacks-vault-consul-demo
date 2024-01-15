@@ -94,7 +94,8 @@ component "k8s-namespace" {
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.this
+    kubernetes  = provider.kubernetes.configuration
+    aws    = provider.aws.configurations[each.value]
   }
 
 }

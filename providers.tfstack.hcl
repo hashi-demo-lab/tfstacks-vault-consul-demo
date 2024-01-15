@@ -57,6 +57,35 @@ provider "hcp" "configuration" {
   }
 }
 
+provider "hcp" "configuration" {
+
+  config {
+    project_id = var.hcp_project_id
+
+    workload_identity {
+      resource_name = var.workload_idp_name
+      token_file = var.hcp_identity_token_file
+    }
+    
+  }
+}
+
+provider "kubernetes" "configuration" {
+  
+  config { 
+    host                   = component.eks[var.hcp_region].endpoint
+    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
+
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      # This requires the awscli to be installed locally where Terraform is executed
+      args = ["eks", "get-token", "--cluster-name", component.eks[each.value].cluster_name]
+    }
+
+  }
+}
+
 provider "cloudinit" "this" {}
 provider "kubernetes" "this" {}
 provider "time" "this" {}
