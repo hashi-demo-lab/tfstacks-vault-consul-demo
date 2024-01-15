@@ -68,6 +68,11 @@ variable "consul_min_version" {
   default = "1.16.4"
 }
 
+variable "cluster_name" {
+  type = string
+  default = "eks-cluster"
+}
+
 variable "cluster_namespace" {
   type = string
   default = "tfstacks-namespace"
