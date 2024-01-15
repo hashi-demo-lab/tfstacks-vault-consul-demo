@@ -24,7 +24,7 @@ deployment "development" {
     deployment_id = "hvn-tfstacks"
     hvn_cidr = "172.31.0.0/16"
     # HCP Consul Specific
-    consul_deployment_name = "tfstacks-consul"
+    consul_deployment_name = "tfstacks-consul-dev"
     consul_tier = "development"
     consul_min_version = "1.16.4"
     
