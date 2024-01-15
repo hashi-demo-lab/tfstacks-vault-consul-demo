@@ -7,8 +7,7 @@ variable "hcp_region" {
 /* variable "hcp_project_id" {
   description = "HCP Project ID"
   type        = string
-  default     = "b1b0b041-fc8d-4d11-9929-8a225d1e3ee6"
-} */
+}  */
 
 variable "vpc_id" {
   description = "VPC ID"

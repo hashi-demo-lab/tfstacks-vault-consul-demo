@@ -10,6 +10,19 @@ variable "hcp_identity_token_file" {
   type = string
 }
 
+variable "workload_idp_name" {
+  type = string
+  default = "tfstacks-workload-identity-provider"
+}
+
+variable "hcp_region" {
+  type = string
+}
+
+variable "hcp_project_id" {
+  type = string
+}
+
 variable "role_arn" {
   type = string
 }
