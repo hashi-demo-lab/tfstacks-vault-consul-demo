@@ -60,7 +60,7 @@ provider "hcp" "configuration" {
 provider "kubernetes" "configuration" {
   for_each = var.regions
   config { 
-    host                   = component.eks[var.hcp_region].cluster_endpoint
+    host                   = component.eks[each.value].cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
 
     exec {
