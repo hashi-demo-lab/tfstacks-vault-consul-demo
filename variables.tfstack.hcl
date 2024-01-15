@@ -2,7 +2,11 @@ variable "regions" {
   type = set(string)
 }
 
-variable "identity_token_file" {
+variable "aws_identity_token_file" {
+  type = string
+}
+
+variable "hcp_identity_token_file" {
   type = string
 }
 

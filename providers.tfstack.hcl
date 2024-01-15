@@ -39,12 +39,10 @@ provider "aws" "configurations" {
 
     assume_role_with_web_identity {
       role_arn                = var.role_arn
-      web_identity_token_file = var.identity_token_file
+      web_identity_token_file = var.aws_identity_token_file
     }
   }
 }
-
-
 
 provider "hcp" "configuration" {
 
@@ -52,7 +50,8 @@ provider "hcp" "configuration" {
     project_id = var.hcp_project_id
 
     assume_role_with_web_identity {
-      web_identity_token_file = var.identity_token_file
+      resource_name = var.workload_idp_name
+      token_file = var.hcp_identity_token_file
     }
     
   }
