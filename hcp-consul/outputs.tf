@@ -5,14 +5,17 @@ output "root_token" {
 
 output "bootstrap_token" {
   value = base64decode(yamldecode(hcp_consul_cluster_root_token.token.kubernetes_secret).data.token)
+  sensitive = true
 }
 
 output "gossip_encrypt_key" {
   value = base64decode(yamldecode(data.hcp_consul_agent_kubernetes_secret.consul.secret).data.gossipEncryptionKey)
+  sensitive = true
 }
 
 output "client_ca_cert" {
   value = base64decode(yamldecode(data.hcp_consul_agent_kubernetes_secret.consul.secret).data.caCert)
+  sensitive = true
 }
 
 output "public_endpoint_url" {
