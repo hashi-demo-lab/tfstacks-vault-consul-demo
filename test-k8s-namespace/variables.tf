@@ -1,6 +1,5 @@
 variable "cluster_name" {
   type    = string
-  default = "eks-cluster"
 }
 
 variable "cluster_endpoint" {
@@ -9,6 +8,7 @@ variable "cluster_endpoint" {
 
 variable "oidc_provider_arn" {
   type    = string
+  default = null
 }
 
 variable "cluster_certificate_authority_data" {
