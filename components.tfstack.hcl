@@ -23,6 +23,7 @@ component "eks" {
     vpc_id = component.vpc[each.value].vpc_id
     private_subnets = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
+    cluster_name = var.cluster_name
   }
 
   providers = {
