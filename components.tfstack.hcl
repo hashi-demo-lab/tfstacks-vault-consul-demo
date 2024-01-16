@@ -141,8 +141,12 @@ component "k8s-namespace" {
       deployment_name = var.consul_deployment_name
       helm_chart_version = var.consul_helm_chart_version
       consul_version = var.consul_min_version
-      replicas = var.consul_replicas
       kubernetes_api_endpoint = component.eks[each.value].eks_endpoint
+      private_endpoint_url = var.consul_private_endpoint_url
+      bootstrap_token = var.consul_bootstrap_token
+      gossip_encrypt_key = var.consul_gossip_encrypt_key
+      client_ca_cert = var.consul_client_ca_cert
+      replicas = var.consul_replicas
     }
 
   }
