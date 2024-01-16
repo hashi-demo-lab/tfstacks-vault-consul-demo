@@ -33,6 +33,7 @@ deployment "development" {
     consul_tier = "development"
     consul_min_version = "1.17.1"
     cluster_namespace = "tfstacks-namespace"
+    k8s_identity_token_file = identity_token.k8s.jwt_filename
     
   }
 }

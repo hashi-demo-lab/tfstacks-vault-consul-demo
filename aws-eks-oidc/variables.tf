@@ -8,11 +8,6 @@ variable "tfc_hostname" {
   default = "https://app.terraform.io"
 }
 
-variable "tfc_group_claims" {
-  type    = string
-  default = "hashi-demos-apj"
-}
-
 variable "cluster_name" {
   type    = string
 }
