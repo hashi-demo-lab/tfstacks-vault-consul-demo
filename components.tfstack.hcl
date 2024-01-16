@@ -78,7 +78,7 @@ component "hcp-consul" {
   }
 
 }
-
+# AWS EKS OIDC pre-reqs
 component "eks-oidc" {
   for_each = var.regions
 
