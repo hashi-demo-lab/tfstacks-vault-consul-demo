@@ -41,6 +41,10 @@ deployment "development" {
     #K8S
     k8s_identity_token_file = identity_token.k8s.jwt_filename
     namespace = "tfstacks"
-    
+
+    # Consul
+    consul_replicas = 1
+    helm_chart_version = "1.3.1"
+
   }
 }
