@@ -20,8 +20,6 @@ deployment "development" {
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
     cluster_name = "eks-cluster"
-    aws_auth_roles = []
-    manage_aws_auth_configmap = false
 
     # HCP HVN specific
     workload_idp_name = "iam/project/b1b0b041-fc8d-4d11-9929-8a225d1e3ee6/service-principal/tfstacks-hcp/workload-identity-provider/tfstacks-workload-identity-provider"

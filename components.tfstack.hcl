@@ -24,8 +24,6 @@ component "eks" {
     private_subnets = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
     cluster_name = var.cluster_name
-    manage_aws_auth_configmap = var.manage_aws_auth_configmap
-    aws_auth_roles = var.aws_auth_roles
   }
 
   providers = {
