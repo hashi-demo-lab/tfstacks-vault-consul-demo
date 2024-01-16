@@ -101,7 +101,7 @@ component "eks-oidc" {
 component "k8s-namespace" {
   for_each = var.regions
 
-  source = "./test-k8s-namespace"
+  source = "./k8s-oidc"
 
   inputs = {
     cluster_namespace = component.eks-oidc[each.value].cluster_name
