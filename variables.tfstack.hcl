@@ -120,4 +120,9 @@ variable "consul_helm_chart_version" {
   type = string
 }
 
+variable "consul_replicas" {
+  type = number
+  default = 1
+}
+
 
