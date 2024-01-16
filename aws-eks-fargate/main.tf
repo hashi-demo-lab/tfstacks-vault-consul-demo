@@ -12,10 +12,12 @@ module "eks" {
   cluster_name                   = var.cluster_name
   cluster_version                = var.kubernetes_version 
   cluster_endpoint_public_access = true
-  manage_aws_auth_configmap = false
-  aws_auth_roles = var.aws_auth_roles
+
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnets
+
+  manage_aws_auth_configmap = var.manage_aws_auth_configmap
+  aws_auth_roles = var.aws_auth_roles
 
   # Fargate profiles use the cluster primary security group so these are not utilized
   create_cluster_security_group = false

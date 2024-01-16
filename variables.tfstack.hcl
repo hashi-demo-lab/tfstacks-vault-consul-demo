@@ -19,6 +19,20 @@ variable "workload_idp_name" {
   default = "tfstacks-workload-identity-provider"
 }
 
+variable "aws_auth_roles" {
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}
+
+variable "manage_aws_auth_configmap" {
+  type    = bool
+  default = false
+}
+
 variable "hcp_region" {
   type = string
 }
@@ -107,11 +121,3 @@ variable "consul_helm_chart_version" {
 }
 
 
-variable "aws_auth_roles" {
-  type = list(object({
-    rolearn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
-}
