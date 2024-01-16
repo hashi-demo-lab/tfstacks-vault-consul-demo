@@ -79,6 +79,20 @@ component "hcp-consul" {
 
 }
 
+component "eks-oidc" {
+  for_each = var.regions
+
+  source = "./aws-eks-oidc"
+
+  inputs = {
+    cluster_name = component.eks[each.value].cluster_name
+  }
+
+  providers = {
+    aws    = provider.aws.configurations[each.value]
+  }
+}
+
 # Create K8s Namespace
 
 component "k8s-namespace" {
