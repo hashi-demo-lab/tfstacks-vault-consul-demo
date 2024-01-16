@@ -124,7 +124,7 @@ component "k8s-identity" {
     variable = {
       deployment_name = var.consul_deployment_name
       helm_chart_version = var.consul_helm_chart_version
-      consul_version = var.consul_version
+      consul_version = var.consul_min_version
       replicas = var.consul_replicas
       kubernetes_api_endpoint = component.eks[each.value].eks_endpoint
     }
