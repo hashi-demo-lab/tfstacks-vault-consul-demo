@@ -34,6 +34,11 @@ required_providers {
     version = "~> 2.12"
   }
 
+  local = {
+    source = "hashicorp/local"
+    version = "~> 2.4"
+  }
+
 }
 
 provider "aws" "configurations" {
@@ -95,3 +100,4 @@ provider "cloudinit" "this" {}
 provider "kubernetes" "this" {}
 provider "time" "this" {}
 provider "tls" "this" {}
+provider "local" "this" {}

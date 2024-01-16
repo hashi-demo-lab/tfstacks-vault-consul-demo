@@ -155,6 +155,7 @@ component "consul-deploy" {
   providers = {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
     helm  = provider.helm.oidc_configurations[each.value]
+    local = provider.local.this
   }
 
 }
