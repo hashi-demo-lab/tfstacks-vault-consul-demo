@@ -97,8 +97,7 @@ component "eks-oidc" {
 }
 
 # Create K8s Namespace
-
-component "k8s-namespace" {
+component "k8s-identity" {
   for_each = var.regions
 
   source = "./k8s-oidc"
