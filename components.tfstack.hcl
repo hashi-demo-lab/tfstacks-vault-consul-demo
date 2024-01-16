@@ -105,7 +105,7 @@ component "k8s-namespace" {
 
   inputs = {
     cluster_name = component.eks[each.value].cluster_name
-    cluster_namespace = var.cluster_namespace
+    cluster_namespace = component.eks-oidc[each.value].cluster_name
   }
 
   providers = {
