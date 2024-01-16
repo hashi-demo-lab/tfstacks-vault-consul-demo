@@ -141,7 +141,7 @@ component "consul-deploy" {
       deployment_name = var.consul_deployment_name
       helm_chart_version = var.consul_helm_chart_version
       consul_version = var.consul_min_version
-      kubernetes_api_endpoint = component.eks[each.value].eks_endpoint
+      kubernetes_api_endpoint = component.eks[each.value].cluster_endpoint
       private_endpoint_url = component.hcp-consul.private_endpoint_url
       bootstrap_token = component.hcp-consul.bootstrap_token
 
