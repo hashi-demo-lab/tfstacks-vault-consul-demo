@@ -1,5 +1,8 @@
 
 # odic-identity pre-requisite
+
+
+
 resource "kubernetes_cluster_role_binding_v1" "oidc_role" {
   metadata {
     generate_name = "odic-identity"

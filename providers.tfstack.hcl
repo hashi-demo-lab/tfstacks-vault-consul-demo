@@ -76,7 +76,7 @@ provider "kubernetes" "oidc_configurations" {
   config { 
     host                   = component.eks-oidc[each.value].eks_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    token   = var.k8s_identity_token_file
+    token   = file(var.k8s_identity_token_file)
   }
 }
 
@@ -86,7 +86,7 @@ provider "helm" "oidc_configurations" {
     kubernetes {
       host                   = component.eks-oidc[each.value].eks_endpoint
       cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-      token   = var.k8s_identity_token_file
+      token   = file(var.k8s_identity_token_file)
     }
   }
 }
