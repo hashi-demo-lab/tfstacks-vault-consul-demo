@@ -87,10 +87,10 @@ component "k8s-namespace" {
   source = "./test-k8s-namespace"
 
   inputs = {
-    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
-    cluster_endpoint = component.eks[each.value].cluster_endpoint
+    #cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
+    #cluster_endpoint = component.eks[each.value].cluster_endpoint
     cluster_name = component.eks[each.value].cluster_name
-    oidc_provider_arn = component.eks[each.value].oidc_provider_arn
+    #oidc_provider_arn = component.eks[each.value].oidc_provider_arn
     cluster_namespace = var.cluster_namespace
   }
 
