@@ -105,3 +105,13 @@ variable "consul_version" {
 variable "consul_helm_chart_version" {
   type = string
 }
+
+
+variable "aws_auth_roles" {
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}

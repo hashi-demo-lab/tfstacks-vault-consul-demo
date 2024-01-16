@@ -20,3 +20,12 @@ variable "kubernetes_version" {
   type    = string
   default = "1.27"  
 }
+
+variables "aws_auth_roles" {
+  type = list(object({
+    role_arn = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+}

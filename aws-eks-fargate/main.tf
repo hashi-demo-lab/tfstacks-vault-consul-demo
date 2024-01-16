@@ -10,9 +10,10 @@ module "eks" {
   source  = "git::https://github.com/hashi-demo-lab/terraform-aws-eks.git?ref=v19.21.4"
 
   cluster_name                   = var.cluster_name
-  cluster_version                = var.kubernetes_version   #"1.27" 
+  cluster_version                = var.kubernetes_version 
   cluster_endpoint_public_access = true
-
+  manage_aws_auth_configmap = true
+  aws_auth_roles = var.aws_auth_roles
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnets
 
