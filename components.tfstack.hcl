@@ -104,13 +104,11 @@ component "k8s-namespace" {
   source = "./test-k8s-namespace"
 
   inputs = {
-    cluster_name = component.eks[each.value].cluster_name
     cluster_namespace = component.eks-oidc[each.value].cluster_name
   }
 
   providers = {
     kubernetes  = provider.kubernetes.configurations[each.value]
-    aws    = provider.aws.configurations[each.value]
   }
 
 }

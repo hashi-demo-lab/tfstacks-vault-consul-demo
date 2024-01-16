@@ -39,7 +39,6 @@ deployment "development" {
 
     #K8S
     k8s_identity_token_file = identity_token.k8s.jwt_filename
-    cluster_namespace = "tfstacks-namespace"
     
   }
 }
