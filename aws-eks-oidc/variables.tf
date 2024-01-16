@@ -1,6 +1,6 @@
 variable "tfc_kubernetes_audience" {
   type    = string
-  default = "tfc.k8s.workload.identity"
+  default = "k8s.workload.identity"
 }
 
 variable "tfc_hostname" {

@@ -77,3 +77,13 @@ variable "cluster_namespace" {
   type = string
   default = "tfstacks-namespace"
 }
+
+variable "tfc_hostname" {
+  type = string
+  default = "https://app.terraform.io"
+}
+
+variable "tfc_kubernetes_audience" {
+  type = string
+  default = "k8s.workload.identity"
+}
