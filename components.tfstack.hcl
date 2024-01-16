@@ -110,8 +110,9 @@ component "k8s-identity" {
   providers = {
     kubernetes  = provider.kubernetes.configurations[each.value]
   }
-
 }
+
+
 
 # Helm Install Consul
 

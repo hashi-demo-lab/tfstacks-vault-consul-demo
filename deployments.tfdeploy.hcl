@@ -38,7 +38,7 @@ deployment "development" {
     tfc_organization_name = "hashi-demos-apj"
 
     #K8S
-    #k8s_identity_token_file = identity_token.k8s.jwt_filename
+    k8s_identity_token_file = identity_token.k8s.jwt_filename
     
   }
 }
