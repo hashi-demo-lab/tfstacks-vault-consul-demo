@@ -101,8 +101,3 @@ variable "consul_version" {
 variable "consul_helm_chart_version" {
   type = string
 }
-variable "consul_deployment_name" {
-  type = string
-  default = "tfstacks-consul"
-}
-
