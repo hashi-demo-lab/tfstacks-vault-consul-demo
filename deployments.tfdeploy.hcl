@@ -36,9 +36,10 @@ deployment "development" {
     #EKS OIDC
     tfc_kubernetes_audience = "k8s.workload.identity"
     tfc_hostname = "https://app.terraform.io"
+    tfc_organization_name = "hashi-demos-apj"
 
     #K8S
-    #k8s_identity_token_file = identity_token.k8s.jwt_filename
+    k8s_identity_token_file = identity_token.k8s.jwt_filename
     
   }
 }
