@@ -34,7 +34,7 @@ deployment "development" {
     consul_min_version = "1.17.1"
     
     #EKS OIDC
-    tfc_kubernetes_audience = "tfc.k8s.workload.identity"
+    tfc_kubernetes_audience = "k8s.workload.identity"
     tfc_hostname = "https://app.terraform.io"
 
     #K8S
