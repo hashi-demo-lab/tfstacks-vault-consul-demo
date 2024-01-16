@@ -10,6 +10,10 @@ variable "hcp_identity_token_file" {
   type = string
 }
 
+variable "k8s_identity_token_file" {
+  type = string
+}
+
 variable "workload_idp_name" {
   type = string
   default = "tfstacks-workload-identity-provider"
