@@ -21,7 +21,3 @@ variable "cluster_certificate_authority_data" {
 variable "cluster_namespace" {
   type    = string
 }
-
-variable "eks_token" {
-  type    = string
-}
