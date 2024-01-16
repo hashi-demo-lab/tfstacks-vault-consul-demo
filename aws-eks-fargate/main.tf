@@ -12,7 +12,7 @@ module "eks" {
   cluster_name                   = var.cluster_name
   cluster_version                = var.kubernetes_version 
   cluster_endpoint_public_access = true
-  manage_aws_auth_configmap = true
+  manage_aws_auth_configmap = false
   aws_auth_roles = var.aws_auth_roles
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnets
