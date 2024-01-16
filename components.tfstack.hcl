@@ -123,7 +123,7 @@ component "k8s-namespace" {
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.configurations[each.value]
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
   }
 }
 
