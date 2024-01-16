@@ -112,6 +112,21 @@ component "k8s-identity" {
   }
 }
 
+component "k8s-namespace" {
+  for_each = var.regions
+
+  source = "./k8s-namespace"
+
+  inputs = {
+    cluster_namespace = component.eks-oidc[each.value].cluster_name
+    tfc_organization_name = var.tfc_organization_name
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.configurations[each.value]
+  }
+}
+
 
 
 # Helm Install Consul
