@@ -29,6 +29,11 @@ required_providers {
     version = "~> 4.0"
   }
 
+  helm = {
+    source = "hashicorp/helm"
+    version = "~> 2.12"
+  }
+
 }
 
 provider "aws" "configurations" {
