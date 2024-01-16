@@ -91,3 +91,18 @@ variable "tfc_kubernetes_audience" {
   type = string
   default = "k8s.workload.identity"
 }
+
+# Consul Helm Chart
+
+variable "consul_version" {
+  type = string
+}
+
+variable "consul_helm_chart_version" {
+  type = string
+}
+variable "consul_deployment_name" {
+  type = string
+  default = "tfstacks-consul"
+}
+
