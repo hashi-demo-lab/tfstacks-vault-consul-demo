@@ -66,12 +66,6 @@ provider "kubernetes" "configurations" {
   }
 }
 
-/* provider "kubernetes" {
-  host                   = data.aws_eks_cluster.upstream.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.upstream.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.upstream_auth.token
-}
-
 provider "cloudinit" "this" {}
 provider "kubernetes" "this" {}
 provider "time" "this" {}
