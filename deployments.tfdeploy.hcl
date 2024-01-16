@@ -7,10 +7,10 @@ identity_token "hcp" {
   audience = ["hcp.workload.identity"]
 }
 
-identity_token "k8s" {
+/* identity_token "k8s" {
   audience = ["k8s.workload.identity"]
 }
-
+ */
 
 deployment "development" {
   variables = {
@@ -38,7 +38,7 @@ deployment "development" {
     tfc_hostname = "https://app.terraform.io"
 
     #K8S
-    k8s_identity_token_file = identity_token.k8s.jwt_filename
+    #k8s_identity_token_file = identity_token.k8s.jwt_filename
     
   }
 }

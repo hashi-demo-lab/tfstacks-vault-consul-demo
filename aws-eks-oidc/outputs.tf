@@ -1,6 +1,6 @@
 output "eks_token" {
-  value = data.aws_eks_cluster_auth.upstream_auth.token
-  sensitive = true
+  value = nonsensitive(data.aws_eks_cluster_auth.upstream_auth.token)
+  sensitive = false
 }
 
 output "eks_endpoint" {

@@ -62,7 +62,7 @@ provider "kubernetes" "configurations" {
   config { 
     host                   = component.eks-oidc[each.value].eks_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    token   = sensitive(component.eks-oidc[each.value].eks_token)
+    token   = component.eks-oidc[each.value].eks_token
   }
 }
 
