@@ -118,7 +118,7 @@ component "k8s-namespace" {
   source = "./k8s-namespace"
 
   inputs = {
-    cluster_namespace = component.eks-oidc[each.value].cluster_name
+    namespace = var.namespace
     tfc_organization_name = var.tfc_organization_name
   }
 

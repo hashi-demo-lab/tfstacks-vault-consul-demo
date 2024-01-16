@@ -77,9 +77,8 @@ variable "cluster_name" {
   default = "eks-cluster"
 }
 
-variable "cluster_namespace" {
+variable "namespace" {
   type = string
-  default = "tfstacks-namespace"
 }
 
 variable "tfc_hostname" {

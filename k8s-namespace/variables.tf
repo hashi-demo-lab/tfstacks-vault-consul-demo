@@ -1,3 +1,3 @@
-variable "cluster_namespace" {
+variable "namespace" {
   type    = string
 }

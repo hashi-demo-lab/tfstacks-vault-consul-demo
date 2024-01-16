@@ -8,6 +8,6 @@ resource "kubernetes_namespace_v1" "example" {
       mylabel = "label-value"
     }
 
-    name = var.cluster_namespace
+    name = var.namespace
   }
 }
