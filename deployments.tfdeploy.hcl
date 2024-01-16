@@ -7,10 +7,9 @@ identity_token "hcp" {
   audience = ["hcp.workload.identity"]
 }
 
-/* identity_token "k8s" {
+identity_token "k8s" {
   audience = ["k8s.workload.identity"]
 }
- */
 
 deployment "development" {
   variables = {
