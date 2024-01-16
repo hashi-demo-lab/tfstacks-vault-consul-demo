@@ -86,6 +86,9 @@ component "eks-oidc" {
 
   inputs = {
     cluster_name = component.eks[each.value].cluster_name
+    tfc_kubernetes_audience = var.tfc_kubernetes_audience
+    tfc_hostname = var.tfc_hostname
+    
   }
 
   providers = {
@@ -101,7 +104,7 @@ component "k8s-namespace" {
   source = "./test-k8s-namespace"
 
   inputs = {
-    cluster_name = var.cluster_name
+    cluster_name = component.eks[each.value].cluster_name
     cluster_namespace = var.cluster_namespace
   }
 

@@ -32,8 +32,14 @@ deployment "development" {
     consul_deployment_name = "tfstacks-consul-dev"
     consul_tier = "development"
     consul_min_version = "1.17.1"
-    cluster_namespace = "tfstacks-namespace"
+    
+    #EKS OIDC
+    tfc_kubernetes_audience = "tfc.k8s.workload.identity"
+    tfc_hostname = "https://app.terraform.io"
+
+    #K8S
     k8s_identity_token_file = identity_token.k8s.jwt_filename
+    cluster_namespace = "tfstacks-namespace"
     
   }
 }
