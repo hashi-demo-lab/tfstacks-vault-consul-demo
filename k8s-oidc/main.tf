@@ -18,16 +18,3 @@ resource "kubernetes_cluster_role_binding_v1" "oidc_role" {
 }
 
 
-resource "kubernetes_namespace_v1" "example" {
-  metadata {
-    annotations = {
-      name = "example-annotation"
-    }
-
-    labels = {
-      mylabel = "label-value"
-    }
-
-    name = var.cluster_namespace
-  }
-}
