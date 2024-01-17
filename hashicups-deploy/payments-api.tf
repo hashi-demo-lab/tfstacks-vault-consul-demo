@@ -1,10 +1,3 @@
-resource "local_file" "payments-api-config" {
-  content = templatefile("../../../examples/templates/payments-api-config.yml", {
-    jaeger_collector_fqdn = ""
-    })
-  filename = "${path.module}/config-maps/payments-api-config.yml.tmp"
-}
-
 resource "kubernetes_service" "payments-api" {
   metadata {
     name = "payments-api"
@@ -36,7 +29,7 @@ resource "kubernetes_config_map" "payments-api" {
   }
 
   data = {
-    "payments-api.conf" = local_file.payments-api-config.content
+    "payments-api.conf" = "${file("${path.module}/config-maps/payments-api-config.yml")}"
   }
 
   depends_on = [
