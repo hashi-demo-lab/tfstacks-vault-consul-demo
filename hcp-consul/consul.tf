@@ -11,5 +11,5 @@ resource "hcp_consul_cluster_root_token" "token" {
 }
 
 data "hcp_consul_agent_kubernetes_secret" "consul" {
-  cluster_id = hcp_consul_cluster.consul.cluster_id
+  cluster_id = hcp_consul_cluster.consul.datacenter
 }
