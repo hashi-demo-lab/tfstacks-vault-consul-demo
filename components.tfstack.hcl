@@ -195,5 +195,6 @@ component "deploy-hashicups" {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
     consul = provider.consul.configurations[each.value]
     time = provider.time.this
+    local = provider.local.this
   }
 }

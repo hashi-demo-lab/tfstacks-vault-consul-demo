@@ -1,6 +1,6 @@
 output "root_token" {
-  value     = hcp_consul_cluster_root_token.token.secret_id
-  sensitive = true
+  value     = nonsensitive(hcp_consul_cluster_root_token.token.secret_id)
+  sensitive = false
 }
 
 output "bootstrap_token" {
