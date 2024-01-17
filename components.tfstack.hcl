@@ -112,6 +112,30 @@ component "k8s-identity" {
   }
 }
 
+component "k8s-addons" {
+  for_each = var.regions
+
+  source = "./aws-eks-addons"
+
+  inputs = {
+    cluster_namespace = component.eks-oidc[each.value].cluster_name
+    vpc_id = component.vpc[each.value].vpc_id
+    private_subnets = component.vpc[each.value].private_subnets
+    cluster_endpoint = component.eks-oidc[each.value].eks_endpoint
+    cluster_version = component.eks[each.value].cluster_version
+    oidc_provider_arn = component.eks[each.value].oidc_provider_arn
+    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data   
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+    helm  = provider.helm.oidc_configurations[each.value]
+    aws    = provider.aws.configurations[each.value]
+  }
+}
+
+
+
 component "k8s-namespace" {
   for_each = var.regions
 

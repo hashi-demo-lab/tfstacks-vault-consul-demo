@@ -1,12 +1,11 @@
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-0ca02263a9d1dde5d"
 }
 
 variable "region" {
   type    = string
-  default = "ap-southeast-2"
+  default = "ap-southeast-1"
 }
 
 variable "cluster_name" {
@@ -20,7 +19,6 @@ variable "cluster_endpoint" {
 
 variable "cluster_version" {
   type    = string
-  default = "1.27"
 }
 
 variable "oidc_provider_arn" {
