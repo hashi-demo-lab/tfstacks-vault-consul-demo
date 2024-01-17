@@ -89,7 +89,7 @@ resource "kubernetes_deployment" "product-api-db" {
 
 }
 
-resource "consul_config_entry" "sd-product-api-db" {
+/* resource "consul_config_entry" "sd-product-api-db" {
   kind        = "service-defaults"
   name        = "product-api-db"
   partition   = "hashicups"
@@ -102,9 +102,9 @@ resource "consul_config_entry" "sd-product-api-db" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */
 
-resource "consul_config_entry" "si-product-api-db" {
+/* resource "consul_config_entry" "si-product-api-db" {
   name        = "product-api-db"
   kind        = "service-intentions"
   partition   = "hashicups"
@@ -125,4 +125,4 @@ resource "consul_config_entry" "si-product-api-db" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */

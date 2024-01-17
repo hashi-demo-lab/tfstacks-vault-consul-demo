@@ -106,7 +106,7 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-resource "consul_config_entry" "ig-nginx" {
+/* resource "consul_config_entry" "ig-nginx" {
   name        = "aws-hashicups-ingress-gateway"
   kind        = "ingress-gateway"
   partition   = "hashicups"
@@ -155,4 +155,4 @@ resource "consul_config_entry" "si-nginx" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */

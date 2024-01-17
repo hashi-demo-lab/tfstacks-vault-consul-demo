@@ -109,7 +109,7 @@ resource "kubernetes_deployment" "payments-api" {
 
 }
 
-resource "consul_config_entry" "ep-payments-api" {
+/* resource "consul_config_entry" "ep-payments-api" {
   name = "hashicups"
   kind = "exported-services"
   partition   = "hashicups"
@@ -150,4 +150,4 @@ resource "consul_config_entry" "si-payments-api" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */

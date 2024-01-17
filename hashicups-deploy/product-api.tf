@@ -115,7 +115,7 @@ resource "kubernetes_deployment" "product-api" {
   
 
 }
-
+/* 
 resource "consul_config_entry" "si-product-api" {
   name        = "product-api"
   kind        = "service-intentions"
@@ -137,4 +137,4 @@ resource "consul_config_entry" "si-product-api" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */

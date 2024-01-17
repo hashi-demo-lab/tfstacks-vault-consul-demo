@@ -90,7 +90,7 @@ resource "kubernetes_deployment" "public-api" {
 
 }
 
-resource "consul_config_entry" "si-public-api" {
+/* resource "consul_config_entry" "si-public-api" {
   name        = "public-api"
   kind        = "service-intentions"
   partition   = "hashicups"
@@ -111,4 +111,4 @@ resource "consul_config_entry" "si-public-api" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */

@@ -72,7 +72,7 @@ resource "kubernetes_deployment" "frontend" {
   
 }
 
-resource "consul_config_entry" "si-frontend" {
+/* resource "consul_config_entry" "si-frontend" {
   name        = "frontend"
   kind        = "service-intentions"
   partition   = "hashicups"
@@ -93,4 +93,4 @@ resource "consul_config_entry" "si-frontend" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-}
+} */
