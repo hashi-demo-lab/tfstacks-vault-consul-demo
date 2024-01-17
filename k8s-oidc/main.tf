@@ -23,3 +23,33 @@ data "kubernetes_config_map_v1" "auth" {
     namespace = "kube-system"
   }
 }
+
+locals {
+  new_role_yaml = <<-EOF
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::855831148133:role/aws_simon.lynch_test-developer
+      username: aws_simon.lynch_test-developer
+    EOF
+}
+
+# 8. Update aws-auth configmap
+resource "kubernetes_config_map_v1_data" "aws_auth" {
+  force = true
+
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+
+  data = {
+    # Convert to list, make distinict to remove duplicates, and convert to yaml as mapRoles is a yaml string.
+    # replace() remove double quotes on "strings" in yaml output.
+    # distinct() only apply the change once, not append every run.
+    mapRoles = replace(yamlencode(distinct(concat(yamldecode(data.kubernetes_config_map.aws_auth.data.mapRoles), yamldecode(local.new_role_yaml)))), "\"", "")
+  }
+
+  lifecycle {
+    ignore_changes = []
+  }
+}
