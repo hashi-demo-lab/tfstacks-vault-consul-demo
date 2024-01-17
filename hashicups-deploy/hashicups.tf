@@ -1,10 +1,10 @@
 // create kubernetes resources on hashicups eks cluster
 
 resource "kubernetes_namespace" "eks-hashicups-namespaces" {
-  for_each = toset(var.hashicups_config.aws.eks_namespaces)
+  for_each = var.hashicups_namspace
 
   metadata {
-    name = each.key
+    name = each.value
   }
 }
 

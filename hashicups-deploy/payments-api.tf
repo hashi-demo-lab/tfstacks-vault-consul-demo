@@ -25,7 +25,7 @@ resource "kubernetes_service" "payments-api" {
   }
 
   depends_on = [
-    kubernetes_namespace.gke-hashicups-namespaces
+    kubernetes_namespace.eks-hashicups-namespaces
   ]
 }
 
@@ -40,7 +40,7 @@ resource "kubernetes_config_map" "payments-api" {
   }
 
   depends_on = [
-    kubernetes_namespace.gke-hashicups-namespaces
+    kubernetes_namespace.eks-hashicups-namespaces
   ]
 }
 
@@ -52,7 +52,7 @@ resource "kubernetes_service_account" "payments-api" {
   automount_service_account_token = true
 
   depends_on = [
-    kubernetes_namespace.gke-hashicups-namespaces
+    kubernetes_namespace.eks-hashicups-namespaces
   ]
 }
 
@@ -120,7 +120,7 @@ resource "kubernetes_deployment" "payments-api" {
   wait_for_rollout = false
   
   depends_on = [
-    kubernetes_namespace.gke-hashicups-namespaces
+    kubernetes_namespace.eks-hashicups-namespaces
   ]
 }
 
