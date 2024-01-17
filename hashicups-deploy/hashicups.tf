@@ -8,27 +8,7 @@ resource "kubernetes_namespace" "eks-hashicups-namespaces" {
   }
 }
 
-resource "kubernetes_namespace" "gke-hashicups-namespaces" {
-  for_each = toset(var.hashicups_config.gcp.gke_namespaces)
-
-  metadata {
-    name = each.key
-  }
-}
-
 resource "consul_config_entry" "eks-proxy_defaults" {
-  kind        = "proxy-defaults"
-  name        = "global"
-  partition   = "hashicups"
-
-  config_json = jsonencode({
-    Config = {
-      Protocol = "http"
-    }
-  })
-}
-
-resource "consul_config_entry" "gke-proxy_defaults" {
   kind        = "proxy-defaults"
   name        = "global"
   partition   = "hashicups"
