@@ -131,6 +131,7 @@ component "k8s-addons" {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
     helm  = provider.helm.oidc_configurations[each.value]
     aws    = provider.aws.configurations[each.value]
+    time = provider.time.this
   }
 }
 
