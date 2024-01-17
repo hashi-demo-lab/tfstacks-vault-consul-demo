@@ -105,7 +105,7 @@ provider "consul" "configurations" {
   for_each = var.regions
   config {
     address = component.hcp-consul.public_endpoint_url
-    token = component.hcp-consu.root_token
+    token = component.hcp-consul.root_token
     datacenter = component.hcp-consul.consul_datacenter
     scheme = "https"
   }
