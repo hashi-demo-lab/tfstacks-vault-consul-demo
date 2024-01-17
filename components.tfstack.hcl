@@ -137,7 +137,6 @@ component "consul-deploy" {
   source = "./consul-deploy"
 
   inputs = {
-    variable = {
       deployment_name = var.consul_deployment_name
       helm_chart_version = var.consul_helm_chart_version
       consul_version = var.consul_min_version
@@ -149,8 +148,6 @@ component "consul-deploy" {
       client_ca_cert = component.hcp-consul.client_ca_cert
       replicas = var.consul_replicas
     }
-
-  }
 
   providers = {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
