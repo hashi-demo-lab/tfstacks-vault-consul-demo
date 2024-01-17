@@ -115,7 +115,7 @@ component "k8s-identity" {
 component "k8s-addons" {
   for_each = var.regions
 
-  source = "./aws-eks-addons"
+  source = "./aws-eks-addon"
 
   inputs = {
     cluster_namespace = component.eks-oidc[each.value].cluster_name
