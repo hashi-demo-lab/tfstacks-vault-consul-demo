@@ -180,7 +180,7 @@ component "consul-deploy" {
 }
 
 # Deploy Hashicups K8s
-component "k8s-namespace" {
+component "deploy-hashicups" {
   for_each = var.regions
 
   source = "./hashicups-deploy"

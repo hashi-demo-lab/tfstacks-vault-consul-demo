@@ -108,6 +108,7 @@ provider "consul" "configurations" {
     token = component.hcp-consul[each.value].root_token
     datacenter = component.hcp-consul[each.value].consul_datacenter
     scheme = "https"
+  }
 }
 
 
