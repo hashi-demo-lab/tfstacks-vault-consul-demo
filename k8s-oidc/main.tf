@@ -17,7 +17,7 @@ resource "kubernetes_cluster_role_binding_v1" "oidc_role" {
   }
 }
 
-data "kubernetes_config_map_v1" "auth" {
+data "kubernetes_config_map" "aws_auth" {
   metadata {
     name      = "aws-auth"
     namespace = "kube-system"
@@ -34,7 +34,7 @@ locals {
 }
 
 # 8. Update aws-auth configmap
-resource "kubernetes_config_map_v1_data" "aws_auth" {
+resource "kubernetes_config_map_v1" "aws_auth" {
   force = true
 
   metadata {
