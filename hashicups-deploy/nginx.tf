@@ -1,7 +1,7 @@
 resource "kubernetes_service" "nginx" {
   metadata {
     name = "nginx"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
     labels = {
         app = "nginx"
     }
@@ -16,16 +16,12 @@ resource "kubernetes_service" "nginx" {
     }
     type = "ClusterIP"
   }
-
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_config_map" "nginx" {
   metadata {
     name = "nginx-config"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
 
   data = {
@@ -40,19 +36,16 @@ resource "kubernetes_config_map" "nginx" {
 resource "kubernetes_service_account" "nginx" {
   metadata {
     name = "nginx"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   automount_service_account_token = true
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "nginx"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
     replicas = 2

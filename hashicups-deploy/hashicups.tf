@@ -8,6 +8,8 @@ resource "kubernetes_namespace" "eks-hashicups-namespaces" {
   }
 }
 
+
+
 resource "consul_config_entry" "eks-proxy_defaults" {
   kind        = "proxy-defaults"
   name        = "global"

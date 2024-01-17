@@ -1,7 +1,7 @@
 resource "kubernetes_service" "public-api" {
   metadata {
     name = "public-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
     labels = {
         app = "public-api"
     }
@@ -17,27 +17,21 @@ resource "kubernetes_service" "public-api" {
     type = "ClusterIP"
   }
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_service_account" "public-api" {
   metadata {
     name = "public-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   automount_service_account_token = true
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_deployment" "public-api" {
   metadata {
     name = "public-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
     replicas = 2
@@ -94,9 +88,6 @@ resource "kubernetes_deployment" "public-api" {
   }
   wait_for_rollout = false
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "consul_config_entry" "si-public-api" {

@@ -1,7 +1,7 @@
 resource "kubernetes_service" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"].metadata[0].name
     labels = {
         app = "product-api-db"
     }
@@ -17,15 +17,12 @@ resource "kubernetes_service" "product-api-db" {
     type = "ClusterIP"
   }
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_service_account" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"].metadata[0].name
   }
   automount_service_account_token = true
 
@@ -34,7 +31,7 @@ resource "kubernetes_service_account" "product-api-db" {
 resource "kubernetes_deployment" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"].metadata[0].name
   }
   spec {
     replicas = 2

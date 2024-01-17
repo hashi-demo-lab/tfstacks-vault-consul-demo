@@ -1,7 +1,7 @@
 resource "kubernetes_service" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"].metadata[0].name
     labels = {
         app = "payments-api"
     }
@@ -21,22 +21,20 @@ resource "kubernetes_service" "payments-api" {
 resource "kubernetes_config_map" "payments-api" {
   metadata {
     name = "payments-api-config"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"].metadata[0].name
   }
 
   data = {
     "payments-api.conf" = "${file("${path.module}/config-maps/payments-api-config.yml")}"
   }
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
+
 }
 
 resource "kubernetes_service_account" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"].metadata[0].name
   }
   automount_service_account_token = true
 
@@ -48,7 +46,7 @@ resource "kubernetes_service_account" "payments-api" {
 resource "kubernetes_deployment" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"].metadata[0].name
   }
   spec {
     replicas = 2
@@ -108,9 +106,7 @@ resource "kubernetes_deployment" "payments-api" {
   }
   wait_for_rollout = false
   
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
+
 }
 
 resource "consul_config_entry" "ep-payments-api" {

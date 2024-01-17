@@ -1,7 +1,7 @@
 resource "kubernetes_service" "frontend" {
   metadata {
     name = "frontend"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
     labels = {
         app = "frontend"
     }
@@ -17,27 +17,21 @@ resource "kubernetes_service" "frontend" {
     type = "ClusterIP"
   }
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_service_account" "frontend" {
   metadata {
     name = "frontend"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   automount_service_account_token = true
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_deployment" "frontend" {
   metadata {
     name = "frontend"
-    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
     replicas = 2
@@ -76,9 +70,6 @@ resource "kubernetes_deployment" "frontend" {
   }
   wait_for_rollout = false
   
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "consul_config_entry" "si-frontend" {
