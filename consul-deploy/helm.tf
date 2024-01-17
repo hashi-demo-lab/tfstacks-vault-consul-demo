@@ -9,7 +9,7 @@ resource "local_file" "eks-client-default-partition-helm-values" {
     replicas                      = var.replicas
     cloud                         = "aws"
     })
-  filename = "${path.module}/eks-client-default-partition-helm-values.yml.tmp"
+  filename = "eks-client-default-partition-helm-values.yml.tmp"
 }
 
 # consul client
