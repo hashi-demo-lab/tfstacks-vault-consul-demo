@@ -46,5 +46,13 @@ deployment "development" {
     consul_replicas = 1
     helm_chart_version = "1.3.1"
 
+    #Hashicups
+    hashicups_config = {
+              aws = {
+                eks_namespaces = ["frontend", "products", "payments"]
+              }
+    }
+
+
   }
 }

@@ -39,6 +39,10 @@ required_providers {
     version = "~> 2.4"
   }
 
+   consul = {
+      source = "hashicorp/consul"
+      version = "2.20.0"
+  }
 }
 
 provider "aws" "configurations" {
@@ -96,8 +100,19 @@ provider "helm" "oidc_configurations" {
   }
 }
 
+provider "consul" "configurations" {
+  for_each = var.regions
+  config{
+    address = component.hcp-consul[each.value].public_endpoint_url
+    token = component.hcp-consul[each.value].root_token
+  }
+  
+}
+
+
 provider "cloudinit" "this" {}
 provider "kubernetes" "this" {}
 provider "time" "this" {}
 provider "tls" "this" {}
 provider "local" "this" {}
+

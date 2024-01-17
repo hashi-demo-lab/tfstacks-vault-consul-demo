@@ -5,10 +5,12 @@ variable "hashicups_config" {
   type        = map
   default     = {
     aws = {
-      eks_namespaces = ["frontend", "products"]
-    }
-    gcp = {
-      gke_namespaces = ["payments"]
+      eks_namespaces = ["frontend", "products", "payments"]
     }
   }
+}
+
+variable "ingress_public_fqdn" {
+  description = "Public EKS Consul FQDN for ingress"
+  type        = string
 }

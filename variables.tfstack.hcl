@@ -125,4 +125,8 @@ variable "consul_replicas" {
   default = 1
 }
 
+#hashicup
 
+variable "hashicups_config" {
+  type = map
+}

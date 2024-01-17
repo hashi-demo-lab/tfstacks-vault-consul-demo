@@ -136,7 +136,6 @@ component "k8s-addons" {
 }
 
 
-
 component "k8s-namespace" {
   for_each = var.regions
 
@@ -151,8 +150,6 @@ component "k8s-namespace" {
     kubernetes  = provider.kubernetes.oidc_configurations[each.value]
   }
 }
-
-
 
 # Helm Install Consul
 
@@ -183,3 +180,19 @@ component "consul-deploy" {
 }
 
 # Deploy Hashicups K8s
+component "k8s-namespace" {
+  for_each = var.regions
+
+  source = "./hashicups-deploy"
+
+  inputs = {
+    hashicups_config = var.hashicups_config
+    ingress_public_fqdn = component.consul-deploy[each.value].ingress_public_fqdn
+
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+    consul = provider.consul.configurations[each.value]
+  }
+}
