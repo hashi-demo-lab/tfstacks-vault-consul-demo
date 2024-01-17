@@ -10,7 +10,7 @@ resource "kubernetes_namespace" "eks-hashicups-namespaces" {
 
 
 
-resource "consul_config_entry" "eks-proxy_defaults" {
+/* resource "consul_config_entry" "eks-proxy_defaults" {
   kind        = "proxy-defaults"
   name        = "global"
   partition   = "hashicups"
@@ -20,7 +20,7 @@ resource "consul_config_entry" "eks-proxy_defaults" {
       Protocol = "http"
     }
   })
-}
+} */
 
 resource "time_sleep" "wait_5_seconds" {
   create_duration = "5s"
