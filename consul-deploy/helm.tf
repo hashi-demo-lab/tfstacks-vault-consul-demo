@@ -1,5 +1,5 @@
-resource "local_file" "eks-client-default-partition-helm-values" {
-  content = templatefile("${path.module}/templates/hcp-consul-client-partition-helm.yml", {
+locals {
+content = templatefile("${path.module}/templates/hcp-consul-client-partition-helm.yml", {
     partition_name                = "default"
     deployment_name               = "${var.deployment_name}-hcp"
     consul_version                = var.consul_version
@@ -9,7 +9,6 @@ resource "local_file" "eks-client-default-partition-helm-values" {
     replicas                      = var.replicas
     cloud                         = "aws"
     })
-  filename = "eks-client-default-partition-helm-values.yml.tmp"
 }
 
 # consul client
@@ -22,7 +21,7 @@ resource "helm_release" "consul-client" {
   timeout       = "300"
   wait          = true
   values        = [
-    local_file.eks-client-default-partition-helm-values.content
+    local.content
   ]
 
   depends_on    = [
