@@ -28,7 +28,7 @@ module "eks" {
   fargate_profiles = {
     app_wildcard = {
       selectors = [
-        { namespace = "app-*" }
+        { namespace = "consul-*" }
       ]
     }
     kube_system = {
