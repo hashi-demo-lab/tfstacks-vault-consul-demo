@@ -68,7 +68,6 @@ resource "aws_route" "hcp_hvn_route" {
 
 
 #### Rules for HCP Connectivity
-
 module "sg-consul" {
   source = "terraform-aws-modules/security-group/aws"
   version     = "4.9.0"

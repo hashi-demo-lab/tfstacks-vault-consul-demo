@@ -34,7 +34,7 @@ locals {
 }
 
 # 8. Update aws-auth configmap
-resource "kubernetes_config_map_v1" "aws_auth" {
+resource "kubernetes_config_map_v1" "aws_auth_new" {
 
   metadata {
     name      = "aws-auth"
