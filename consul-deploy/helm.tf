@@ -1,5 +1,5 @@
 resource "local_file" "eks-client-default-partition-helm-values" {
-  content = templatefile("../templates/hcp-consul-client-partition-helm.yml", {
+  content = templatefile("${path.module}/templates/hcp-consul-client-partition-helm.yml", {
     partition_name                = "default"
     deployment_name               = "${var.deployment_name}-hcp"
     consul_version                = var.consul_version
