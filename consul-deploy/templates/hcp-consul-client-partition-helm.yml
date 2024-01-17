@@ -4,8 +4,7 @@ global:
   peering:
     enabled: true
   adminPartitions:
-    enabled: false
-    name: ${partition_name}
+    enabled: true
   image: "hashicorp/consul-enterprise:${consul_version}"
   datacenter: ${deployment_name}
   tls:
@@ -14,7 +13,7 @@ global:
     caCert:
       secretName: ${deployment_name}-client-secrets
       secretKey: caCert
-  enableConsulNamespaces: false
+  enableConsulNamespaces: true
   acls:
     manageSystemACLs: true
     bootstrapToken:
