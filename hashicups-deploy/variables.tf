@@ -6,7 +6,6 @@ variable "hashicups_namspace" {
   default     =     ["frontend", "products", "payments"]
   
   }
-}
 
 variable "ingress_public_fqdn" {
   description = "Public EKS Consul FQDN for ingress"

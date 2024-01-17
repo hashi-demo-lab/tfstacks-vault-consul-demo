@@ -127,6 +127,6 @@ variable "consul_replicas" {
 
 #hashicup
 
-variable "hashicups_config" {
-  type = map(object)
+variable "hashicups_namspace" {
+  type = set(string)
 }
