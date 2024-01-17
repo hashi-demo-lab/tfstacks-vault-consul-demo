@@ -118,7 +118,7 @@ component "k8s-addons" {
   source = "./aws-eks-addon"
 
   inputs = {
-    cluster_namespace = component.eks-oidc[each.value].cluster_name
+    cluster_name = component.eks-oidc[each.value].cluster_name
     vpc_id = component.vpc[each.value].vpc_id
     private_subnets = component.vpc[each.value].private_subnets
     cluster_endpoint = component.eks-oidc[each.value].eks_endpoint
