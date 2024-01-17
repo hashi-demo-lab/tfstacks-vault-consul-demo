@@ -38,9 +38,6 @@ resource "kubernetes_service_account" "payments-api" {
   }
   automount_service_account_token = true
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_deployment" "payments-api" {
