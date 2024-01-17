@@ -106,10 +106,9 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-/* resource "consul_config_entry" "ig-nginx" {
-  name        = "aws-hashicups-ingress-gateway"
+resource "consul_config_entry" "ig-nginx" {
+  name        = "aws-default-ingress-gateway"
   kind        = "ingress-gateway"
-  partition   = "hashicups"
   namespace   = "default"
 
   config_json = jsonencode({
@@ -137,16 +136,14 @@ resource "kubernetes_deployment" "nginx" {
 resource "consul_config_entry" "si-nginx" {
   name        = "nginx"
   kind        = "service-intentions"
-  partition   = "hashicups"
   namespace   = "frontend"
 
   config_json = jsonencode({
     Sources = [
       {
-        Partition  = "hashicups"
         Namespace  = "default"
         Action     = "allow"
-        Name       = "aws-hashicups-ingress-gateway"
+        Name       = "aws-default-ingress-gateway"
         Type       = "consul"
       }
     ]
@@ -155,4 +152,4 @@ resource "consul_config_entry" "si-nginx" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-} */
+}

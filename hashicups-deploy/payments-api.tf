@@ -106,30 +106,9 @@ resource "kubernetes_deployment" "payments-api" {
 
 }
 
-/* resource "consul_config_entry" "ep-payments-api" {
-  name = "hashicups"
-  kind = "exported-services"
-  partition   = "hashicups"
-
-  config_json = jsonencode({
-    Services = [
-      {
-        Name = "payments-api"
-        Namespace = "payments"
-        Consumers = [
-          {
-            Peer = "aws-gcp-hashicups"
-          }
-        ]
-      }
-    ]
-  })
-}
-
 resource "consul_config_entry" "si-payments-api" {
   name        = "payments-api"
   kind        = "service-intentions"
-  partition   = "hashicups"
   namespace   = "payments"
 
   config_json = jsonencode({
@@ -139,7 +118,6 @@ resource "consul_config_entry" "si-payments-api" {
         Action     = "allow"
         Name       = "public-api"
         Type       = "consul"
-        Peer       = "aws-gcp-hashicups"
       }
     ]
   })
@@ -147,4 +125,4 @@ resource "consul_config_entry" "si-payments-api" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-} */
+}

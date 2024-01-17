@@ -115,17 +115,15 @@ resource "kubernetes_deployment" "product-api" {
   
 
 }
-/* 
+
 resource "consul_config_entry" "si-product-api" {
   name        = "product-api"
   kind        = "service-intentions"
-  partition   = "hashicups"
   namespace   = "products"
 
   config_json = jsonencode({
     Sources = [
       {
-        Partition  = "hashicups"
         Namespace  = "frontend"
         Action     = "allow"
         Name       = "public-api"
@@ -137,4 +135,4 @@ resource "consul_config_entry" "si-product-api" {
   depends_on = [
     time_sleep.wait_5_seconds
   ]
-} */
+}
