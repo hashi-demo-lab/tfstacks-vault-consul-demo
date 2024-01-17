@@ -3,7 +3,7 @@
 variable "hashicups_namspace" {
   description = "Hashicups namespace"
   type        = set(string)
-  default     =     ["frontend", "products", "payments"]
+  default     = ["frontend", "products", "payments"]
   
   }
 

@@ -1,7 +1,7 @@
 resource "kubernetes_service" "frontend" {
   metadata {
     name = "frontend"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
     labels = {
         app = "frontend"
     }
@@ -25,7 +25,7 @@ resource "kubernetes_service" "frontend" {
 resource "kubernetes_service_account" "frontend" {
   metadata {
     name = "frontend"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   automount_service_account_token = true
 
@@ -37,7 +37,7 @@ resource "kubernetes_service_account" "frontend" {
 resource "kubernetes_deployment" "frontend" {
   metadata {
     name = "frontend"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   spec {
     replicas = 2

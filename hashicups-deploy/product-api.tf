@@ -1,7 +1,7 @@
 resource "kubernetes_service" "product-api" {
   metadata {
     name = "product-api"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
     labels = {
         app = "product-api"
     }
@@ -25,7 +25,7 @@ resource "kubernetes_service" "product-api" {
 resource "kubernetes_config_map" "product-api" {
   metadata {
     name = "product-api-config"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
   }
 
   data = {
@@ -40,7 +40,7 @@ resource "kubernetes_config_map" "product-api" {
 resource "kubernetes_service_account" "product-api" {
   metadata {
     name = "product-api"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
   }
   automount_service_account_token = true
 
@@ -52,7 +52,7 @@ resource "kubernetes_service_account" "product-api" {
 resource "kubernetes_deployment" "product-api" {
   metadata {
     name = "product-api"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
   }
   spec {
     replicas = 2

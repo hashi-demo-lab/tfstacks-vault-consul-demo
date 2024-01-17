@@ -1,7 +1,7 @@
 resource "kubernetes_service" "nginx" {
   metadata {
     name = "nginx"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
     labels = {
         app = "nginx"
     }
@@ -25,7 +25,7 @@ resource "kubernetes_service" "nginx" {
 resource "kubernetes_config_map" "nginx" {
   metadata {
     name = "nginx-config"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
 
   data = {
@@ -40,7 +40,7 @@ resource "kubernetes_config_map" "nginx" {
 resource "kubernetes_service_account" "nginx" {
   metadata {
     name = "nginx"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   automount_service_account_token = true
 
@@ -52,7 +52,7 @@ resource "kubernetes_service_account" "nginx" {
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "nginx"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   spec {
     replicas = 2
@@ -111,9 +111,6 @@ resource "kubernetes_deployment" "nginx" {
   }
   wait_for_rollout = false
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces,
-  ]
 }
 
 resource "consul_config_entry" "ig-nginx" {

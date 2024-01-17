@@ -1,7 +1,7 @@
 resource "kubernetes_service" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = "payments"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
     labels = {
         app = "payments-api"
     }
@@ -16,16 +16,12 @@ resource "kubernetes_service" "payments-api" {
     }
     type = "ClusterIP"
   }
-
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_config_map" "payments-api" {
   metadata {
     name = "payments-api-config"
-    namespace = "payments"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
   }
 
   data = {
@@ -40,7 +36,7 @@ resource "kubernetes_config_map" "payments-api" {
 resource "kubernetes_service_account" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = "payments"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
   }
   automount_service_account_token = true
 
@@ -52,7 +48,7 @@ resource "kubernetes_service_account" "payments-api" {
 resource "kubernetes_deployment" "payments-api" {
   metadata {
     name = "payments-api"
-    namespace = "payments"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["payments"]
   }
   spec {
     replicas = 2

@@ -1,7 +1,7 @@
 resource "kubernetes_service" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
     labels = {
         app = "product-api-db"
     }
@@ -25,19 +25,16 @@ resource "kubernetes_service" "product-api-db" {
 resource "kubernetes_service_account" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
   }
   automount_service_account_token = true
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "kubernetes_deployment" "product-api-db" {
   metadata {
     name = "product-api-db"
-    namespace = "products"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["products"]
   }
   spec {
     replicas = 2
@@ -93,9 +90,6 @@ resource "kubernetes_deployment" "product-api-db" {
   }
   wait_for_rollout = false
 
-  depends_on = [
-    kubernetes_namespace.eks-hashicups-namespaces
-  ]
 }
 
 resource "consul_config_entry" "sd-product-api-db" {

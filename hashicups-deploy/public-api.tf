@@ -1,7 +1,7 @@
 resource "kubernetes_service" "public-api" {
   metadata {
     name = "public-api"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
     labels = {
         app = "public-api"
     }
@@ -25,7 +25,7 @@ resource "kubernetes_service" "public-api" {
 resource "kubernetes_service_account" "public-api" {
   metadata {
     name = "public-api"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   automount_service_account_token = true
 
@@ -37,7 +37,7 @@ resource "kubernetes_service_account" "public-api" {
 resource "kubernetes_deployment" "public-api" {
   metadata {
     name = "public-api"
-    namespace = "frontend"
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"]
   }
   spec {
     replicas = 2
