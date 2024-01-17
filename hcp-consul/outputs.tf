@@ -25,3 +25,7 @@ output "public_endpoint_url" {
 output "private_endpoint_url" {
   value = hcp_consul_cluster.consul.consul_private_endpoint_url
 }
+
+output "consul_datacenter" {
+  value = hcp_consul_cluster.consul.consul_cluster_id
+}

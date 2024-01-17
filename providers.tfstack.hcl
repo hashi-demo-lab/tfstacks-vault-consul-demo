@@ -100,13 +100,14 @@ provider "helm" "oidc_configurations" {
   }
 }
 
+# NEEDS TO MOVE TO OIDC
 provider "consul" "configurations" {
   for_each = var.regions
-  config{
+  config {
     address = component.hcp-consul[each.value].public_endpoint_url
     token = component.hcp-consul[each.value].root_token
-  }
-  
+    datacenter = component.hcp-consul[each.value].consul_datacenter
+    scheme = "https"
 }
 
 
