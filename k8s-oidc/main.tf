@@ -1,8 +1,5 @@
 
 # odic-identity pre-requisite
-
-
-
 resource "kubernetes_cluster_role_binding_v1" "oidc_role" {
   metadata {
     generate_name = "odic-identity"
@@ -20,4 +17,9 @@ resource "kubernetes_cluster_role_binding_v1" "oidc_role" {
   }
 }
 
-
+data "kubernetes_config_map_v1" "auth" {
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+}
