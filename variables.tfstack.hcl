@@ -128,5 +128,5 @@ variable "consul_replicas" {
 #hashicup
 
 variable "hashicups_config" {
-  type = map(any)
+  type = map(string)
 }
