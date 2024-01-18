@@ -138,7 +138,6 @@ resource "consul_config_entry" "ig-nginx" {
   })
 
   depends_on = [
-    consul_config_entry.eks-proxy_defaults,
     time_sleep.wait_5_seconds
   ]
 }

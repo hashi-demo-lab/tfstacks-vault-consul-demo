@@ -10,16 +10,16 @@ resource "kubernetes_namespace" "eks-hashicups-namespaces" {
 
 
 
-resource "consul_config_entry" "eks-proxy_defaults" {
-  kind        = "proxy-defaults"
-  name        = "global"
+# resource "consul_config_entry" "eks-proxy_defaults" {
+#   kind        = "proxy-defaults"
+#   name        = "global"
 
-  config_json = jsonencode({
-    Config = {
-      Protocol = "http"
-    }
-  })
-}
+#   config_json = jsonencode({
+#     Config = {
+#       Protocol = "http"
+#     }
+#   })
+# }
 
 resource "time_sleep" "wait_5_seconds" {
   create_duration = "5s"
