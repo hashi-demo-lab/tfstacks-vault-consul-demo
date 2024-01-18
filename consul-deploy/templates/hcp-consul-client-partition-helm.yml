@@ -41,7 +41,7 @@ connectInject:
   consulNamespaces:
     mirroringK8S: true  
   transparentProxy:
-    default: false
+    defaultEnabled: false
 meshGateway:
   enabled: true
   replicas: ${replicas}
