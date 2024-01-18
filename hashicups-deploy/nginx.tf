@@ -107,14 +107,14 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-resource "consul_config_entry" "sd-nginx" {
-  name = "nginx"
-  kind = "service-defaults"
+# resource "consul_config_entry" "sd-nginx" {
+#   name = "nginx"
+#   kind = "service-defaults"
 
-  config_json = jsonencode({
-    Protocol    = "http"
-  })
-}
+#   config_json = jsonencode({
+#     Protocol    = "http"
+#   })
+# }
 
 resource "consul_config_entry" "ig-nginx" {
   name        = "aws-default-ingress-gateway"
