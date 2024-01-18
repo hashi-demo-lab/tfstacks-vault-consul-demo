@@ -107,40 +107,31 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-# resource "consul_config_entry" "sd-nginx" {
-#   name = "nginx"
-#   kind = "service-defaults"
+# resource "consul_config_entry" "ig-nginx" {
+#   name        = "aws-default-ingress-gateway"
+#   kind        = "ingress-gateway"
+#   namespace   = "default"
 
 #   config_json = jsonencode({
-#     Protocol    = "http"
+#     Listeners = [
+#       {
+#         Port     = 80
+#         Protocol = "tcp"
+#         Services = [
+#           { 
+#             Name      = "nginx"
+#             Namespace = "frontend" 
+#             Hosts     = ["*"]
+#           }
+#         ]
+#       }
+#     ]
 #   })
+
+#   depends_on = [
+#     time_sleep.wait_5_seconds
+#   ]
 # }
-
-resource "consul_config_entry" "ig-nginx" {
-  name        = "aws-default-ingress-gateway"
-  kind        = "ingress-gateway"
-  namespace   = "default"
-
-  config_json = jsonencode({
-    Listeners = [
-      {
-        Port     = 80
-        Protocol = "http"
-        Services = [
-          { 
-            Name      = "nginx"
-            Namespace = "frontend" 
-            Hosts     = ["*"]
-          }
-        ]
-      }
-    ]
-  })
-
-  depends_on = [
-    time_sleep.wait_5_seconds
-  ]
-}
 
 resource "consul_config_entry" "si-nginx" {
   name        = "nginx"
