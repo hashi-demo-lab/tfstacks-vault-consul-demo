@@ -40,6 +40,8 @@ connectInject:
   envoyExtraArgs: "--log-level debug"
   consulNamespaces:
     mirroringK8S: true  
+  transparentProxy:
+    default: false
 meshGateway:
   enabled: true
   replicas: ${replicas}
