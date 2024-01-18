@@ -20,7 +20,7 @@ deployment "development" {
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
     cluster_name = "eks-cluster"
-    manage_aws_auth_configmap = true
+    manage_aws_auth_configmap = false
 
 
     # HCP HVN specific
