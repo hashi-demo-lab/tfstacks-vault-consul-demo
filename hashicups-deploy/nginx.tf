@@ -63,7 +63,8 @@ resource "kubernetes_deployment" "nginx" {
           app = "nginx"
         }
         annotations = {
-          "consul.hashicorp.com/connect-inject" = true           
+          "consul.hashicorp.com/connect-inject" = true    
+          "consul.hashicorp.com/connect-service-upstreams" = ["frontend.svc.frontend.ns:3000", "public-api.svc.frontend.ns:8080"]
         }
       }
       spec {
@@ -150,6 +151,6 @@ resource "consul_config_entry" "si-nginx" {
   })
 
   depends_on = [
-    time_sleep.wait_5_seconds
+    time_sleep.wait_5_seconds76ű
   ]
 }

@@ -49,7 +49,8 @@ resource "kubernetes_deployment" "public-api" {
           app = "public-api"
         }
         annotations = {
-          "consul.hashicorp.com/connect-inject" = true           
+          "consul.hashicorp.com/connect-inject" = true
+          "consul.hashicorp.com/connect-service-upstreams" = ["product-api.svc.products.ns:9090", "payments-api.svc.payments.ns:8080"]
         }
       }
       spec {
@@ -65,11 +66,11 @@ resource "kubernetes_deployment" "public-api" {
           }
           env {
             name = "PRODUCT_API_URI"
-            value = "http://product-api.virtual.products.ns.hashicups.ap.consul"
+            value = "http://localhost:9090"
           }
           env {
             name = "PAYMENT_API_URI"
-            value = "http://payments-api.virtual.payments.ns.hashicups.ap.aws-gcp-hashicups.peer.consul"
+            value = "http://localhost:8080"
           }
           readiness_probe {
             http_get {

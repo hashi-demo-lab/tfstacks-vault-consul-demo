@@ -25,8 +25,8 @@ events {}
         proxy_buffering off;
 
         resolver 127.0.0.1 valid=30s ipv6=off;
-        set $frontend http://frontend.virtual.frontend.ns.hashicups.ap.consul;
-        set $public_api http://public-api.virtual.frontend.ns.hashicups.ap.consul;
+        set $frontend http://localhost:3000;
+        set $public_api http://localhost:8080;
 
         location / {
           proxy_pass $frontend;

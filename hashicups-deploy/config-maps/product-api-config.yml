@@ -1,4 +1,4 @@
 {
-  "db_connection": "host=product-api-db.virtual.products.ns.hashicups.ap.consul port=5432 user=postgres password=password dbname=products sslmode=disable",
+  "db_connection": "host=localhost port=5432 user=postgres password=password dbname=products sslmode=disable",
   "bind_address": ":9090"
 }

@@ -67,7 +67,8 @@ resource "kubernetes_deployment" "product-api" {
           app = "product-api"
         }
         annotations = {
-          "consul.hashicorp.com/connect-inject" = true           
+          "consul.hashicorp.com/connect-inject" = true     
+          "consul.hashicorp.com/connect-service-upstreams" = ["product-api-db.svc.products.ns:5432"]      
         }
       }
       spec {
