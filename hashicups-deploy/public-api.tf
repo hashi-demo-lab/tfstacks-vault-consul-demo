@@ -34,7 +34,7 @@ resource "kubernetes_deployment" "public-api" {
     namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
-    replicas = 0
+    replicas = 2
 
     selector {
       match_labels = {
