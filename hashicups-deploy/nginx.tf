@@ -48,7 +48,7 @@ resource "kubernetes_deployment" "nginx" {
     namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
-    replicas = 0
+    replicas = 2
 
     selector {
       match_labels = {
@@ -108,31 +108,31 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-# resource "consul_config_entry" "ig-nginx" {
-#   name        = "aws-default-ingress-gateway"
-#   kind        = "ingress-gateway"
-#   namespace   = "default"
+resource "consul_config_entry" "ig-nginx" {
+  name        = "aws-default-ingress-gateway"
+  kind        = "ingress-gateway"
+  namespace   = "default"
 
-#   config_json = jsonencode({
-#     Listeners = [
-#       {
-#         Port     = 80
-#         Protocol = "tcp"
-#         Services = [
-#           { 
-#             Name      = "nginx"
-#             Namespace = "frontend" 
-#             Hosts     = ["*"]
-#           }
-#         ]
-#       }
-#     ]
-#   })
+  config_json = jsonencode({
+    Listeners = [
+      {
+        Port     = 80
+        Protocol = "tcp"
+        Services = [
+          { 
+            Name      = "nginx"
+            Namespace = "frontend" 
+            Hosts     = ["*"]
+          }
+        ]
+      }
+    ]
+  })
 
-#   depends_on = [
-#     time_sleep.wait_5_seconds
-#   ]
-# }
+  depends_on = [
+    time_sleep.wait_5_seconds
+  ]
+}
 
 resource "consul_config_entry" "si-nginx" {
   name        = "nginx"
