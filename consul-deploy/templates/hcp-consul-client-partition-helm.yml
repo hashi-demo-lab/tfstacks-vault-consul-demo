@@ -53,10 +53,12 @@ ingressGateways:
       type: LoadBalancer
       ports:
         - port: 80
+      annotations: |
+        "kubernetes.io/ingress.class": "alb"
+        "alb.ingress.kubernetes.io/scheme": "internet-facing"
+        "alb.ingress.kubernetes.io/target-type": "ip"
   gateways:
     - name: ${cloud}-${partition_name}-ingress-gateway
-  annotations: |
-    "kubernetes.io/ingress.class": "alb"
 terminatingGateways:
   enabled: true
   defaults:
