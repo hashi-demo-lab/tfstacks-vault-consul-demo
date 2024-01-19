@@ -117,7 +117,7 @@ resource "consul_config_entry" "ig-nginx" {
     Listeners = [
       {
         Port     = 80
-        Protocol = "tcp"
+        Protocol = "http"
         Services = [
           { 
             Name      = "nginx"
