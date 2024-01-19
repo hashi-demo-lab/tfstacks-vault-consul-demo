@@ -55,6 +55,8 @@ ingressGateways:
         - port: 80
   gateways:
     - name: ${cloud}-${partition_name}-ingress-gateway
+  annotations: |
+    "kubernetes.io/ingress.class": "alb"
 terminatingGateways:
   enabled: true
   defaults:
