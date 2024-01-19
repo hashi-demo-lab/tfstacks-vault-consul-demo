@@ -50,7 +50,7 @@ resource "kubernetes_deployment" "public-api" {
         }
         annotations = {
           "consul.hashicorp.com/connect-inject" = true
-          "consul.hashicorp.com/connect-service-upstreams" = yamlencode("'product-api.svc.products.ns:9090', 'payments-api.svc.payments.ns:8080'")
+          "consul.hashicorp.com/connect-service-upstreams" = "product-api.svc.products.ns:9090, payments-api.svc.payments.ns:8080"
         }
       }
       spec {
