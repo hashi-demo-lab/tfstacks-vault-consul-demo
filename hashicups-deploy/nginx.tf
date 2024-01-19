@@ -64,7 +64,8 @@ resource "kubernetes_deployment" "nginx" {
         }
         annotations = {
           "consul.hashicorp.com/connect-inject" = true    
-          "consul.hashicorp.com/connect-service-upstreams" = yamlencode("'frontend.svc.frontend.ns:3000', 'public-api.svc.frontend.ns:8080'")
+          "consul.hashicorp.com/connect-service-upstreams" = "frontend.svc.frontend.ns:3000, public-api.svc.frontend.ns:8081"
+          
         }
       }
       spec {
