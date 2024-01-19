@@ -48,7 +48,7 @@ resource "kubernetes_deployment" "nginx" {
     namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
   }
   spec {
-    replicas = 2
+    replicas = 0
 
     selector {
       match_labels = {

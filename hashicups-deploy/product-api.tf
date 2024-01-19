@@ -52,7 +52,7 @@ resource "kubernetes_deployment" "product-api" {
     namespace = kubernetes_namespace.eks-hashicups-namespaces["products"].metadata[0].name
   }
   spec {
-    replicas = 2
+    replicas = 0
 
     selector {
       match_labels = {
