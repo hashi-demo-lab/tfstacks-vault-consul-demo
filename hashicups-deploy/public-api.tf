@@ -11,8 +11,8 @@ resource "kubernetes_service" "public-api" {
       app = "public-api"
     }
     port {
-      port        = 8080
-      target_port = 8080
+      port        = 8081
+      target_port = 8081
     }
     type = "ClusterIP"
   }
@@ -58,11 +58,11 @@ resource "kubernetes_deployment" "public-api" {
           name  = "public-api"
           image = "hashicorpdemoapp/public-api:v0.0.7"
           port {
-            container_port = 8080
+            container_port = 8081
           }
           env {
             name = "BIND_ADDRESS"
-            value = ":8080"
+            value = ":8081"
           }
           env {
             name = "PRODUCT_API_URI"
@@ -75,7 +75,7 @@ resource "kubernetes_deployment" "public-api" {
           readiness_probe {
             http_get {
               path = "/health"
-              port = 8080
+              port = 8081
             }
             failure_threshold     = 2
             initial_delay_seconds = 10
