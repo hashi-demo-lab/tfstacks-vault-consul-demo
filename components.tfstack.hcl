@@ -14,7 +14,7 @@ component "vpc" {
   }
 }
 
-component "eks" {
+/* component "eks" {
   for_each = var.regions
 
   source = "./aws-eks-fargate"
@@ -34,7 +34,7 @@ component "eks" {
     time = provider.time.this
     tls = provider.tls.this
   }
-}
+} */
 
 # HCP HVN and AWS Transit Gateway
 component "hcphvn" {
