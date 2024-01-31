@@ -79,6 +79,7 @@ component "hcp-consul" {
   }
 
 }
+/*
 # AWS EKS OIDC pre-reqs
 component "eks-oidc" {
   for_each = var.regions
@@ -113,7 +114,7 @@ component "k8s-identity" {
   }
 }
 
-component "k8s-addons" {
+/* component "k8s-addons" {
   for_each = var.regions
 
   source = "./aws-eks-addon"
@@ -177,7 +178,7 @@ component "consul-deploy" {
     helm  = provider.helm.oidc_configurations[each.value]
     local = provider.local.this
   }
-
+ 
 }
 /* 
 # Deploy Hashicups K8s
