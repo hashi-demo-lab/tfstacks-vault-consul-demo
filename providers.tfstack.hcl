@@ -71,7 +71,7 @@ provider "hcp" "configuration" {
   }
 }
 
-provider "kubernetes" "configurations" {
+/* provider "kubernetes" "configurations" {
   for_each = var.regions
   config { 
     host                   = component.eks-oidc[each.value].eks_endpoint
@@ -99,7 +99,7 @@ provider "helm" "oidc_configurations" {
     }
   }
 }
-
+ */
 # NEEDS TO MOVE TO OIDC
 provider "consul" "configurations" {
   for_each = var.regions
