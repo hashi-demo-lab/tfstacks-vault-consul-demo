@@ -179,7 +179,7 @@ component "consul-deploy" {
   }
 
 }
-
+/* 
 # Deploy Hashicups K8s
 component "deploy-hashicups" {
   for_each = var.regions
@@ -198,4 +198,4 @@ component "deploy-hashicups" {
     time = provider.time.this
     local = provider.local.this
   }
-}
+} */

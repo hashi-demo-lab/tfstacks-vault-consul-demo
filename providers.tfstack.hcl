@@ -113,13 +113,7 @@ provider "consul" "configurations" {
 
 
 provider "cloudinit" "this" {}
-provider "kubernetes" "this" {
-  config { 
-    host                   = component.eks-oidc[each.value].eks_endpoint
-    cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    token   = file(var.k8s_identity_token_file)
-  }
-}
+provider "kubernetes" "this" {}
 provider "time" "this" {}
 provider "tls" "this" {}
 provider "local" "this" {}
