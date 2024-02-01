@@ -11,6 +11,9 @@ identity_token "k8s" {
   audience = ["k8s.workload.identity"]
 }
 
+deployment "development" {
+}
+
 /* deployment "development" {
   variables = {
     aws_identity_token_file = identity_token.aws.jwt_filename
