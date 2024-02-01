@@ -1,5 +1,5 @@
 
-component "vpc" {
+/* component "vpc" {
   for_each = var.regions
 
   source = "./aws-vpc"
@@ -12,7 +12,7 @@ component "vpc" {
   providers = {
     aws     = provider.aws.configurations[each.value]
   }
-}
+} */
 
 /* component "eks" {
   for_each = var.regions

@@ -45,7 +45,7 @@ required_providers {
   }
 }
 
-provider "aws" "configurations" {
+/* provider "aws" "configurations" {
   for_each = var.regions
 
   config {
@@ -57,7 +57,7 @@ provider "aws" "configurations" {
     }
   }
 }
-
+ */
 /* provider "hcp" "configuration" {
 
   config {
