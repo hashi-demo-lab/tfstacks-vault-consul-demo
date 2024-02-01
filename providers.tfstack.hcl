@@ -58,7 +58,7 @@ provider "aws" "configurations" {
   }
 }
 
-provider "hcp" "configuration" {
+/* provider "hcp" "configuration" {
 
   config {
     project_id = var.hcp_project_id
@@ -69,7 +69,7 @@ provider "hcp" "configuration" {
     }
     
   }
-}
+} */
 
 /* provider "kubernetes" "configurations" {
   for_each = var.regions
@@ -100,7 +100,7 @@ provider "helm" "oidc_configurations" {
   }
 }
  */
-# NEEDS TO MOVE TO OIDC
+/* # NEEDS TO MOVE TO OIDC
 provider "consul" "configurations" {
   for_each = var.regions
   config {
@@ -109,7 +109,7 @@ provider "consul" "configurations" {
     datacenter = component.hcp-consul.consul_datacenter
     scheme = "https"
   }
-}
+} */
 
 
 provider "cloudinit" "this" {}
