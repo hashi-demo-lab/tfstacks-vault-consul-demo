@@ -37,7 +37,7 @@ component "vpc" {
 } */
 
 # HCP HVN and AWS Transit Gateway
-component "hcphvn" {
+/* component "hcphvn" {
 
   source = "./hcp-hvn-transit"
 
@@ -60,9 +60,9 @@ component "hcphvn" {
     hcp    = provider.hcp.configuration
   }
 
-}
+} */
 
-# HCP CONSUL Component
+/* # HCP CONSUL Component
 component "hcp-consul" {
 
   source = "./hcp-consul"
@@ -78,7 +78,7 @@ component "hcp-consul" {
     hcp    = provider.hcp.configuration
   }
 
-}
+} */
 /*
 # AWS EKS OIDC pre-reqs
 component "eks-oidc" {
