@@ -45,7 +45,7 @@ required_providers {
   }
 }
 
-/* provider "aws" "configurations" {
+provider "aws" "configurations" {
   for_each = var.regions
 
   config {
@@ -57,33 +57,22 @@ required_providers {
     }
   }
 }
- */
-/* provider "hcp" "configuration" {
 
-  config {
-    project_id = var.hcp_project_id
 
-    workload_identity {
-      resource_name = var.workload_idp_name
-      token_file = var.hcp_identity_token_file
-    }
-    
-  }
-} */
 
-/* provider "kubernetes" "configurations" {
+provider "kubernetes" "configurations" {
   for_each = var.regions
   config { 
-    host                   = component.eks-oidc[each.value].eks_endpoint
+    host                   = component.eks[each.value].cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
-    token   = component.eks-oidc[each.value].eks_token
+    token   = component.eks[each.value].eks_token
   }
 }
 
 provider "kubernetes" "oidc_configurations" {
   for_each = var.regions
   config { 
-    host                   = component.eks-oidc[each.value].eks_endpoint
+    host                   = component.eks[each.value].cluster_endpoint
     cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
     token   = file(var.k8s_identity_token_file)
   }
@@ -93,14 +82,26 @@ provider "helm" "oidc_configurations" {
   for_each = var.regions
   config {
     kubernetes {
-      host                   = component.eks-oidc[each.value].eks_endpoint
+      host                   = component.eks[each.value].cluster_endpoint
       cluster_ca_certificate = base64decode(component.eks[each.value].cluster_certificate_authority_data)
       token   = file(var.k8s_identity_token_file)
     }
   }
 }
- */
-/* # NEEDS TO MOVE TO OIDC
+
+provider "hcp" "configuration" {
+  config {
+    project_id = var.hcp_project_id
+
+    workload_identity {
+      resource_name = var.workload_idp_name
+      token_file = var.hcp_identity_token_file
+    }
+    
+  }
+}
+
+# consul 
 provider "consul" "configurations" {
   for_each = var.regions
   config {
@@ -109,7 +110,7 @@ provider "consul" "configurations" {
     datacenter = component.hcp-consul.consul_datacenter
     scheme = "https"
   }
-} */
+}
 
 
 provider "cloudinit" "this" {}

@@ -1,5 +1,5 @@
-
-/* component "vpc" {
+#AWS VPC
+component "vpc" {
   for_each = var.regions
 
   source = "./aws-vpc"
@@ -12,19 +12,23 @@
   providers = {
     aws     = provider.aws.configurations[each.value]
   }
-} */
+} 
 
-/* component "eks" {
+#AWS EKS
+component "eks" {
   for_each = var.regions
 
-  source = "./aws-eks-fargate"
+  source = "./aws-eks-managed-node"
 
   inputs = {
     vpc_id = component.vpc[each.value].vpc_id
     private_subnets = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
     cluster_name = var.cluster_name
-    manage_aws_auth_configmap = var.manage_aws_auth_configmap
+    tfc_hostname = var.tfc_hostname
+    tfc_kubernetes_audience = var.tfc_kubernetes_audience
+    eks_clusteradmin_arn = var.eks_clusteradmin_arn
+    eks_clusteradmin_username = var.eks_clusteradmin_username
   }
 
   providers = {
@@ -34,10 +38,68 @@
     time = provider.time.this
     tls = provider.tls.this
   }
-} */
+}
+
+# Update K8s role-binding
+component "k8s-rbac" {
+  for_each = var.regions
+
+  source = "./k8s-rbac"
+
+  inputs = {
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
+    tfc_organization_name = var.tfc_organization_name
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.configurations[each.value]
+  }
+}
+
+
+# K8s Addons - aws load balancer controller, coredns, vpc-cni, kube-proxy
+component "k8s-addons" {
+  for_each = var.regions
+
+  source = "./aws-eks-addon"
+
+  inputs = {
+    cluster_name = component.eks[each.value].cluster_name
+    vpc_id = component.vpc[each.value].vpc_id
+    private_subnets = component.vpc[each.value].private_subnets
+    cluster_endpoint = component.eks[each.value].cluster_endpoint
+    cluster_version = component.eks[each.value].cluster_version
+    oidc_provider_arn = component.eks[each.value].oidc_provider_arn
+    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data
+    oidc_binding_id = component.k8s-rbac[each.value].oidc_binding_id
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+    helm  = provider.helm.oidc_configurations[each.value]
+    aws    = provider.aws.configurations[each.value]
+    time = provider.time.this
+  }
+}
+
+# Namespace
+component "k8s-namespace" {
+  for_each = var.regions
+
+  source = "./k8s-namespace"
+
+  inputs = {
+    namespace = var.namespace
+    labels = component.k8s-addons[each.value].eks_addons
+  }
+
+  providers = {
+    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
+  }
+}
 
 # HCP HVN and AWS Transit Gateway
-/* component "hcphvn" {
+component "hcphvn" {
 
   source = "./hcp-hvn-transit"
 
@@ -60,9 +122,9 @@
     hcp    = provider.hcp.configuration
   }
 
-} */
+}
 
-/* # HCP CONSUL Component
+# HCP CONSUL Component
 component "hcp-consul" {
 
   source = "./hcp-consul"
@@ -78,83 +140,10 @@ component "hcp-consul" {
     hcp    = provider.hcp.configuration
   }
 
-} */
-/*
-# AWS EKS OIDC pre-reqs
-component "eks-oidc" {
-  for_each = var.regions
-
-  source = "./aws-eks-oidc"
-
-  inputs = {
-    cluster_name = component.eks[each.value].cluster_name
-    tfc_kubernetes_audience = var.tfc_kubernetes_audience
-    tfc_hostname = var.tfc_hostname
-    
-  }
-
-  providers = {
-    aws    = provider.aws.configurations[each.value]
-  }
 }
 
-# Create K8s Namespace
-component "k8s-identity" {
-  for_each = var.regions
-
-  source = "./k8s-oidc"
-
-  inputs = {
-    cluster_namespace = component.eks-oidc[each.value].cluster_name
-    tfc_organization_name = var.tfc_organization_name
-  }
-
-  providers = {
-    kubernetes  = provider.kubernetes.configurations[each.value]
-  }
-}
-
-/* component "k8s-addons" {
-  for_each = var.regions
-
-  source = "./aws-eks-addon"
-
-  inputs = {
-    cluster_name = component.eks-oidc[each.value].cluster_name
-    vpc_id = component.vpc[each.value].vpc_id
-    private_subnets = component.vpc[each.value].private_subnets
-    cluster_endpoint = component.eks-oidc[each.value].eks_endpoint
-    cluster_version = component.eks[each.value].cluster_version
-    oidc_provider_arn = component.eks[each.value].oidc_provider_arn
-    cluster_certificate_authority_data = component.eks[each.value].cluster_certificate_authority_data   
-  }
-
-  providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
-    helm  = provider.helm.oidc_configurations[each.value]
-    aws    = provider.aws.configurations[each.value]
-    time = provider.time.this
-  }
-}
-
-
-component "k8s-namespace" {
-  for_each = var.regions
-
-  source = "./k8s-namespace"
-
-  inputs = {
-    namespace = var.namespace
-    tfc_organization_name = var.tfc_organization_name
-  }
-
-  providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations[each.value]
-  }
-}
 
 # Helm Install Consul
-
 component "consul-deploy" {
   for_each = var.regions
 
@@ -180,7 +169,7 @@ component "consul-deploy" {
   }
  
 }
-/* 
+
 # Deploy Hashicups K8s
 component "deploy-hashicups" {
   for_each = var.regions
@@ -188,7 +177,7 @@ component "deploy-hashicups" {
   source = "./hashicups-deploy"
 
   inputs = {
-    hashicups_namspace= var.hashicups_namspace
+    hashicups_namspace= component.k8s-namespace[each.value].namespace
     ingress_public_fqdn = component.consul-deploy[each.value].ingress_public_fqdn
 
   }
@@ -199,4 +188,4 @@ component "deploy-hashicups" {
     time = provider.time.this
     local = provider.local.this
   }
-} */
+}
