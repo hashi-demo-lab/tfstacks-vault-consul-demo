@@ -5,7 +5,7 @@ variable "region" {
 
 variable "cluster_name" {
   type    = string
-  default = "eks-cluster"
+  default = "eks-dev"
 }
 
 variable "private_subnets" {
@@ -13,11 +13,12 @@ variable "private_subnets" {
 }
 
 variable "vpc_id" {
-  type    = string
+  type = string
 }
 
 variable "kubernetes_version" {
   type    = string
+  default = "1.28"
 }
 
 variable "tfc_hostname" {
@@ -26,13 +27,13 @@ variable "tfc_hostname" {
 }
 
 variable "tfc_kubernetes_audience" {
-  type    = string
+  type = string
 }
 
 variable "eks_clusteradmin_arn" {
-  type    = string
+  type = string
 }
 
 variable "eks_clusteradmin_username" {
-  type    = string
+  type = string
 }
