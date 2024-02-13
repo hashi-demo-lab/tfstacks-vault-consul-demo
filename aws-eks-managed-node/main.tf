@@ -35,7 +35,9 @@ module "eks" {
 
   enable_cluster_creator_admin_permissions = true
 
-  access_entries = {
+/*
+
+access_entries = {
     # One access entry with a policy associated
     single = {
       kubernetes_groups = []
@@ -52,7 +54,10 @@ module "eks" {
       }
     }
   }
-}
+*/
+
+
+} 
 
 data "aws_eks_cluster" "upstream" {
   depends_on = [module.eks]
