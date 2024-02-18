@@ -22,7 +22,16 @@ module "eks_blueprints_addons" {
   eks_addons = {
     vpc-cni    = {}
     kube-proxy = {}
+    coredns = {
+      most_recent = true
+
+      timeouts = {
+        create = "25m"
+        delete = "10m"
+      }
+    }
   }
+  
 
   # Enable Fargate logging
   enable_fargate_fluentbit = false
