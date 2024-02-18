@@ -18,7 +18,7 @@ resource "helm_release" "consul-client" {
   repository    = "https://helm.releases.hashicorp.com"
   version       = var.helm_chart_version
   namespace     = "consul"
-  timeout       = "300"
+  timeout       = "500"
   wait          = true
   values        = [
     local.content
