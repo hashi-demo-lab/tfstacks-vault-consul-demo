@@ -110,6 +110,14 @@ variable "tfc_kubernetes_audience" {
   default = "k8s.workload.identity"
 }
 
+variable "eks_clusteradmin_arn" {
+  type = string
+}
+
+variable "eks_clusteradmin_username" {
+  type = string
+}
+
 # Consul Helm Chart
 
 variable "consul_version" {
