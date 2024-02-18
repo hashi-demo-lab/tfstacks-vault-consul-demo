@@ -1,10 +1,9 @@
 // create kubernetes resources on hashicups eks cluster
-
 resource "kubernetes_namespace" "eks-hashicups-namespaces" {
-  for_each = var.hashicups_namspace
+  for_each = var.hashicups_namespace
 
   metadata {
-    name = each.value
+    name = var.hashicups_namspace
   }
 }
 

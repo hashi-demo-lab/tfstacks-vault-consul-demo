@@ -177,7 +177,7 @@ component "deploy-hashicups" {
   source = "./hashicups-deploy"
 
   inputs = {
-    hashicups_namspace= component.k8s-namespace[each.value].namespace
+    hashicups_namspace = var.hashicups_namespaces
     ingress_public_fqdn = component.consul-deploy[each.value].ingress_public_fqdn
 
   }

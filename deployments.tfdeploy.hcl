@@ -53,6 +53,6 @@ deployment "development" {
     helm_chart_version = "1.3.1"
 
     #Hashicups
-    hashicups_namspace =  ["frontend", "products", "payments"]
+    hashicups_namespace =  ["frontend", "products", "payments"]
   }
 }

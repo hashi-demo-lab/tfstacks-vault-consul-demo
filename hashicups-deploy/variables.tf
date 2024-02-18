@@ -1,6 +1,6 @@
 // hashicups config variables
 
-variable "hashicups_namspace" {
+variable "hashicups_namespace" {
   description = "Hashicups namespace"
   type        =  set(string)
   default     = ["frontend", "products", "payments"]

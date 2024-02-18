@@ -135,6 +135,6 @@ variable "consul_replicas" {
 
 #hashicup
 
-variable "hashicups_namspace" {
+variable "hashicups_namespace" {
   type = set(string)
 }
