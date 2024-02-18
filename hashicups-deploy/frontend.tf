@@ -1,7 +1,7 @@
 resource "kubernetes_service" "frontend" {
   metadata {
     name = "frontend"
-    namespace = var.
+    namespace = kubernetes_namespace.eks-hashicups-namespaces["frontend"].metadata[0].name
     labels = {
         app = "frontend"
     }

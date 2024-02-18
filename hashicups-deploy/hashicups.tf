@@ -3,7 +3,7 @@ resource "kubernetes_namespace" "eks-hashicups-namespaces" {
   for_each = var.hashicups_namespace
 
   metadata {
-    name = var.hashicups_namspace
+    name = each.key
   }
 }
 
