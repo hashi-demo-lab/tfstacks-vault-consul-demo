@@ -29,7 +29,7 @@ deployment "development" {
     hcp_identity_token_file = identity_token.hcp.jwt_filename
     hcp_region = "ap-southeast-1"
     hcp_project_id = "b1b0b041-fc8d-4d11-9929-8a225d1e3ee6"
-    deployment_id = "hvn-tfstacks"
+    deployment_id = "hvn-tfstacks-3"
     hvn_cidr = "172.31.0.0/16"
     # HCP Consul Specific
     consul_deployment_name = "tfstacks-consul-hcp"
