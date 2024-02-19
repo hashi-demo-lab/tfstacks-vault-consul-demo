@@ -18,10 +18,10 @@ deployment "development" {
     aws_identity_token_file = identity_token.aws.jwt_filename
     regions             = ["ap-southeast-1"]
     role_arn            = "arn:aws:iam::855831148133:role/tfstacks-role"
-    vpc_name = "eks-vpc-dev2"
+    vpc_name = "eks-vpc-dev3"
     vpc_cidr = "10.0.0.0/16"
     kubernetes_version = "1.28"
-    cluster_name = "eks-dev-cluster"
+    cluster_name = "eks-dev-cluster3"
     manage_aws_auth_configmap = false
 
 
@@ -33,7 +33,7 @@ deployment "development" {
     deployment_id = "hvn-tfstacks"
     hvn_cidr = "172.31.0.0/16"
     # HCP Consul Specific
-    consul_deployment_name = "tfstacks-consul-dev"
+    consul_deployment_name = "tfstacks-consul-hcp"
     consul_tier = "development"
     consul_min_version = "1.17.1"
     
@@ -46,7 +46,7 @@ deployment "development" {
 
     #K8S
     k8s_identity_token_file = identity_token.k8s.jwt_filename
-    namespace = "tfstacks"
+    namespace = "tfstacks3"
 
     # Consul
     consul_replicas = 1
