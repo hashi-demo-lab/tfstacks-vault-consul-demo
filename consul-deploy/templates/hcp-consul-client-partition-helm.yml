@@ -49,30 +49,30 @@ meshGateway:
   enabled: true
   replicas: ${replicas}
 
-{{- /*
-  ingressGateways:
-  enabled: true
-  defaults:
-    replicas: ${replicas}
-    service:
-      type: LoadBalancer
-      ports:
-        - port: 80
-      annotations: |
-        "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type": "ip"
-        "service.beta.kubernetes.io/aws-load-balancer-type": "external"
-        "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing" 
-   gateways:
-    - name: ${cloud}-${partition_name}-ingress-gateway 
+
+  #ingressGateways:
+  #enabled: true
+  #defaults:
+  #  replicas: ${replicas}
+  #  service:
+  #    type: LoadBalancer
+  #    ports:
+  #      - port: 80
+  #    annotations: |
+  #      "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type": "ip"
+  #      "service.beta.kubernetes.io/aws-load-balancer-type": "external"
+  #      "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing" 
+  # gateways:
+  #  - name: ${cloud}-${partition_name}-ingress-gateway 
  
-*/ -}}
-{{- /*
- terminatingGateways:
-  enabled: true
-  defaults:
-    replicas: ${replicas}
-  gateways:
-    - name: ${cloud}-${partition_name}-terminating-gateway
+
+
+ #terminatingGateways:
+ # enabled: true
+ # defaults:
+ #   replicas: ${replicas}
+ # gateways:
+ #   - name: ${cloud}-${partition_name}-terminating-gateway
  
-*/ -}}
+
 
