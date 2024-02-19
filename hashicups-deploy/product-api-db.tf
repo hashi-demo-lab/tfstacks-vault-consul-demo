@@ -96,6 +96,10 @@ resource "consul_config_entry" "sd-product-api-db" {
 
   config_json = jsonencode({
     Protocol    = "tcp"
+    Expose      = {}
+    MeshGateway = {}
+    TransparentProxy = {}
+
   })
 
   depends_on = [

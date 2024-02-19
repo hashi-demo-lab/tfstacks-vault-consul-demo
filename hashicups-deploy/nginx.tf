@@ -145,6 +145,8 @@ resource "consul_config_entry" "si-nginx" {
         Namespace  = "default"
         Action     = "allow"
         Name       = "aws-default-ingress-gateway"
+        Partition  = "default"
+        Precedence = 9
         Type       = "consul"
       }
     ]
