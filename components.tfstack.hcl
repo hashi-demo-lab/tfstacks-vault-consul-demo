@@ -14,6 +14,50 @@ component "vpc" {
   }
 } 
 
+# HCP HVN and AWS Transit Gateway
+component "hcphvn" {
+
+  source = "./hcp-hvn-transit"
+
+  inputs = {
+    hcp_project_id = var.hcp_project_id
+    hcp_region = var.hcp_region
+    #need to handle multiple vpc's
+    vpc_id = component.vpc[var.hcp_region].vpc_id
+    private_subnets = component.vpc[var.hcp_region].private_subnets
+    route_table_id = component.vpc[var.hcp_region].route_table_id[0]
+    deployment_id = var.deployment_id
+    hvn_cidr = var.hvn_cidr
+
+    #need to handle multiple vpc's
+    aws_vpc_cidr = var.vpc_cidr
+  }
+
+  providers = {
+    aws    = provider.aws.configurations[var.hcp_region]
+    hcp    = provider.hcp.configuration
+  }
+
+}
+
+# HCP CONSUL Component
+component "hcp-consul" {
+
+  source = "./hcp-consul"
+
+  inputs = {
+    deployment_name = var.consul_deployment_name
+    hvn_id = component.hcphvn.hvn_id
+    tier = var.consul_tier
+    min_version = var.consul_min_version
+  }
+
+  providers = {
+    hcp    = provider.hcp.configuration
+  }
+
+}
+
 #AWS EKS
 component "eks" {
   for_each = var.regions
@@ -100,49 +144,9 @@ component "k8s-namespace" {
   }
 }
 
-# HCP HVN and AWS Transit Gateway
-component "hcphvn" {
 
-  source = "./hcp-hvn-transit"
 
-  inputs = {
-    hcp_project_id = var.hcp_project_id
-    hcp_region = var.hcp_region
-    #need to handle multiple vpc's
-    vpc_id = component.vpc[var.hcp_region].vpc_id
-    private_subnets = component.vpc[var.hcp_region].private_subnets
-    route_table_id = component.vpc[var.hcp_region].route_table_id[0]
-    deployment_id = var.deployment_id
-    hvn_cidr = var.hvn_cidr
 
-    #need to handle multiple vpc's
-    aws_vpc_cidr = var.vpc_cidr
-  }
-
-  providers = {
-    aws    = provider.aws.configurations[var.hcp_region]
-    hcp    = provider.hcp.configuration
-  }
-
-}
-
-# HCP CONSUL Component
-component "hcp-consul" {
-
-  source = "./hcp-consul"
-
-  inputs = {
-    deployment_name = var.consul_deployment_name
-    hvn_id = component.hcphvn.hvn_id
-    tier = var.consul_tier
-    min_version = var.consul_min_version
-  }
-
-  providers = {
-    hcp    = provider.hcp.configuration
-  }
-
-}
 
 
 # Helm Install Consul

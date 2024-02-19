@@ -151,6 +151,6 @@ resource "consul_config_entry" "si-nginx" {
   })
 
   depends_on = [
-    time_sleep.wait_5_seconds76ű
+    time_sleep.wait_5_seconds
   ]
 }
