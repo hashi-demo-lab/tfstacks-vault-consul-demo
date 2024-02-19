@@ -43,6 +43,7 @@ connectInject:
   transparentProxy:
     defaultEnabled: true #false 
   apiGateway: # enable api gateway
+    enabled: true
     managedGatewayClass:
       serviceType: LoadBalancer
 meshGateway:
