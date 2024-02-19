@@ -63,18 +63,18 @@ deployment "development" {
 orchestrate "auto_approve" "safe_plans" {
 
  check {
-   condition     = plan.changes.destroy == 0
+   condition     = context.plan.changes.destroy == 0
    error_message = "Plan has ${plan.changes.destroy} resources to be destroyed."
  }
 
  check {
-   condition     = plan.component_changes.network.total == 0
+   condition     = context.plan.component_changes.network.total == 0
    error_message = "Changes to network component planned."
  }
 
  check {
-   condition     = length(plan.warnings) == 0
-   error_message = "Found ${plan.warnings} warnings in plan."
+   condition     = length(context.plan.warnings) == 0
+   error_message = "Found ${context.plan.warnings} warnings in plan."
  }
 
 }
