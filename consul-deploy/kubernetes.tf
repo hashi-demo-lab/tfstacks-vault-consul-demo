@@ -1,3 +1,4 @@
+/* 
 data "kubernetes_service" "consul-ingress-gateway" {
   metadata {
     name = "consul-aws-default-ingress-gateway"
@@ -8,6 +9,7 @@ data "kubernetes_service" "consul-ingress-gateway" {
     helm_release.consul-client
   ]
 }
+*/
 
 resource "kubernetes_namespace" "consul" {
   metadata {
