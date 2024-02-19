@@ -63,8 +63,8 @@ deployment "development" {
 orchestrate "auto_approve" "safe_plans" {
 
  check {
-   condition     = context.plan.changes.destroy == 0
-   error_message = "Plan has ${context.plan.changes.destroy} resources to be destroyed."
+   condition     = context.plan.changes.remove == 0
+   error_message = "Plan has ${context.plan.changes.remove} resources to be removed."
  }
 
 }
