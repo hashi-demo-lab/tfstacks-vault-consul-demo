@@ -123,10 +123,14 @@ resource "consul_config_entry" "ig-nginx" {
             Name      = "nginx"
             Namespace = "frontend" 
             Hosts     = ["*"]
+            Partition = "default"
           }
         ]
       }
     ]
+    TLS = {
+    Enabled = false
+    }
   })
 
   depends_on = [
@@ -164,6 +168,9 @@ resource "consul_config_entry" "nginx_defaults" {
 
   config_json = jsonencode({
     Protocol = "http"
+    Expose      = {}
+    MeshGateway = {}
+    TransparentProxy = {}
   })
 
   depends_on = [
