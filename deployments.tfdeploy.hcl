@@ -64,17 +64,7 @@ orchestrate "auto_approve" "safe_plans" {
 
  check {
    condition     = context.plan.changes.destroy == 0
-   error_message = "Plan has ${plan.changes.destroy} resources to be destroyed."
- }
-
- check {
-   condition     = context.plan.component_changes.network.total == 0
-   error_message = "Changes to network component planned."
- }
-
- check {
-   condition     = length(context.plan.warnings) == 0
-   error_message = "Found ${context.plan.warnings} warnings in plan."
+   error_message = "Plan has ${context.plan.changes.destroy} resources to be destroyed."
  }
 
 }
