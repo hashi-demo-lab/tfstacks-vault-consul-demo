@@ -53,7 +53,8 @@ component "k8s-rbac" {
   }
 
   providers = {
-    kubernetes  = provider.kubernetes.oidc_configurations[each.value] #provider.kubernetes.configurations[each.value]
+    kubernetes  =  provider.kubernetes.configurations[each.value] 
+    #provider.kubernetes.oidc_configurations[each.value]
   }
 }
 
