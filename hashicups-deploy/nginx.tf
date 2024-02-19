@@ -154,3 +154,17 @@ resource "consul_config_entry" "si-nginx" {
     time_sleep.wait_5_seconds
   ]
 }
+
+resource "consul_config_entry" "nginx_defaults" {
+  name = "nginx"
+  kind = "service-defaults"
+  namespace = "frontend"
+
+  config_json = jsonencode({
+    Protocol = "http"
+  })
+
+  depends_on = [
+    kubernetes_service.nginx
+  ]
+}
