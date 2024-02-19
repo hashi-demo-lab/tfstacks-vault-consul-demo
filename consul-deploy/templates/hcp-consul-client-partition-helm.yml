@@ -41,11 +41,16 @@ connectInject:
   consulNamespaces:
     mirroringK8S: true  
   transparentProxy:
-    defaultEnabled: false
+    defaultEnabled: true #false 
+  apiGateway: # enable api gateway
+    managedGatewayClass:
+      serviceType: LoadBalancer
 meshGateway:
   enabled: true
   replicas: ${replicas}
-ingressGateways:
+
+{{- /*
+  ingressGateways:
   enabled: true
   defaults:
     replicas: ${replicas}
@@ -56,12 +61,18 @@ ingressGateways:
       annotations: |
         "service.beta.kubernetes.io/aws-load-balancer-nlb-target-type": "ip"
         "service.beta.kubernetes.io/aws-load-balancer-type": "external"
-        "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing"
-  gateways:
-    - name: ${cloud}-${partition_name}-ingress-gateway
-terminatingGateways:
+        "service.beta.kubernetes.io/aws-load-balancer-scheme": "internet-facing" 
+   gateways:
+    - name: ${cloud}-${partition_name}-ingress-gateway 
+ 
+*/ -}}
+{{- /*
+ terminatingGateways:
   enabled: true
   defaults:
     replicas: ${replicas}
   gateways:
     - name: ${cloud}-${partition_name}-terminating-gateway
+ 
+*/ -}}
+
