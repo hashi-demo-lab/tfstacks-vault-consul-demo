@@ -14,6 +14,7 @@ resource "consul_config_entry" "eks-proxy_defaults" {
   config_json = jsonencode({
     Config = {
       Protocol = "http"
+      AccessLogs = {}
       Expose      = {}
       MeshGateway = {}
       TransparentProxy = {}
