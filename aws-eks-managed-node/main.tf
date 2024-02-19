@@ -61,20 +61,20 @@ access_entries = {
 } 
 
 data "aws_eks_cluster" "upstream" {
-  depends_on = [module.eks]
-  name       = var.cluster_name
+  #depends_on = [module.eks]
+  name       = module.eks.cluster_name
 
 }
 
 data "aws_eks_cluster_auth" "upstream_auth" {
-  depends_on = [module.eks]
-  name       = var.cluster_name
+  #depends_on = [module.eks]
+  name       = module.eks.cluster_name
 }
 
 
 resource "aws_eks_identity_provider_config" "oidc_config" {
-  depends_on   = [module.eks]
-  cluster_name = var.cluster_name
+  #depends_on   = [module.eks]
+  cluster_name = module.eks.cluster_name
 
   oidc {
     identity_provider_config_name = "tfstack-terraform-cloud"
