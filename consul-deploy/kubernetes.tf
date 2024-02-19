@@ -15,7 +15,7 @@ resource "kubernetes_namespace" "consul" {
   }
 }
 
-resource "kubernetes_secret" "consul-bootstrap-token" {
+resource "kubernetes_secret_v1" "consul-bootstrap-token" {
   metadata {
     name      = "${var.deployment_name}-hcp-bootstrap-token"
     namespace = "consul"
