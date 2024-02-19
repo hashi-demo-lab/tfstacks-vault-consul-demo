@@ -29,6 +29,7 @@ component "eks" {
     tfc_kubernetes_audience = var.tfc_kubernetes_audience
     eks_clusteradmin_arn = var.eks_clusteradmin_arn
     eks_clusteradmin_username = var.eks_clusteradmin_username
+    vpc_security_group_ids = component.hcphvn.consul_sg
   }
 
   providers = {

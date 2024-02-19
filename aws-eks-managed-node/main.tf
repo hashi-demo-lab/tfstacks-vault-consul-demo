@@ -29,6 +29,8 @@ module "eks" {
       min_size     = 1
       max_size     = 3
       desired_size = 2
+      vpc_security_group_ids = [var.vpc_security_group_ids]
+    
     }
 
   }

@@ -37,3 +37,8 @@ variable "eks_clusteradmin_arn" {
 variable "eks_clusteradmin_username" {
   type = string
 }
+
+variable "vpc_security_group_ids" {
+  type = string
+
+}
