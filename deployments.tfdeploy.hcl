@@ -55,3 +55,30 @@ deployment "development" {
     hashicups_namespace =  ["frontend", "products", "payments"]
   }
 }
+
+
+
+
+#The use of custom checks allows a finer-grained approach to auto approval:
+orchestrate "auto_approve" "safe_plans" {
+
+ check {
+   condition     = plan.changes.destroy == 0
+   error_message = "Plan has ${plan.changes.destroy} resources to be destroyed."
+ }
+
+ check {
+   condition     = plan.component_changes.network.total == 0
+   error_message = "Changes to network component planned."
+ }
+
+ check {
+   condition     = length(plan.warnings) == 0
+   error_message = "Found ${plan.warnings} warnings in plan."
+ }
+
+ deployments = [
+   deployment.development,
+ ]
+
+}
