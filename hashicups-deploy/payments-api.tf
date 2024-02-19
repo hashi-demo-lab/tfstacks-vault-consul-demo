@@ -116,6 +116,8 @@ resource "consul_config_entry" "si-payments-api" {
       {
         Namespace  = "frontend"
         Action     = "allow"
+        Partition  = "default"
+        Precedence = 9
         Name       = "public-api"
         Type       = "consul"
       }
