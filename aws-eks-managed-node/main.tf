@@ -61,13 +61,13 @@ access_entries = {
 } 
 
 data "aws_eks_cluster" "upstream" {
-  #depends_on = [module.eks]
+  depends_on = [module.eks]
   name       = module.eks.cluster_name
 
 }
 
 data "aws_eks_cluster_auth" "upstream_auth" {
-  #depends_on = [module.eks]
+  depends_on = [module.eks]
   name       = module.eks.cluster_name
 }
 
