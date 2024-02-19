@@ -49,7 +49,7 @@ deployment "development" {
 
     # Consul
     consul_replicas = 1
-    helm_chart_version = "1.3.1"
+    helm_chart_version = "1.3.3"
 
     #Hashicups
     hashicups_namespace =  ["frontend", "products", "payments"]
