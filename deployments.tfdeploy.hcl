@@ -77,8 +77,4 @@ orchestrate "auto_approve" "safe_plans" {
    error_message = "Found ${plan.warnings} warnings in plan."
  }
 
- deployments = [
-   deployment.development,
- ]
-
 }
