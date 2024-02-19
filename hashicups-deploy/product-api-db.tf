@@ -114,6 +114,8 @@ resource "consul_config_entry" "si-product-api-db" {
         Namespace  = "products"
         Action     = "allow"
         Name       = "product-api"
+        Partition  = "default"
+        Precedence = 9
         Type       = "consul"
       }
     ]

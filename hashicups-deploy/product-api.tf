@@ -128,6 +128,8 @@ resource "consul_config_entry" "si-product-api" {
         Namespace  = "frontend"
         Action     = "allow"
         Name       = "public-api"
+        Partition  = "default"
+        Precedence = 9
         Type       = "consul"
       }
     ]

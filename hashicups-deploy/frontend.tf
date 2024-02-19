@@ -83,6 +83,8 @@ resource "consul_config_entry" "si-frontend" {
         Namespace  = "frontend"
         Action     = "allow"
         Name       = "nginx"
+        Partition  = "default"
+        Precedence = 9
         Type       = "consul"
       }
     ]
