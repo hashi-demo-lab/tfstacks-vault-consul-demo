@@ -41,9 +41,8 @@ connectInject:
   consulNamespaces:
     mirroringK8S: true  
   transparentProxy:
-    defaultEnabled: true #false 
-  apiGateway: # enable api gateway
-    enabled: true
+    defaultEnabled: true
+  apiGateway:
     managedGatewayClass:
       serviceType: LoadBalancer
 meshGateway:
