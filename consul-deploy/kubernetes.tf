@@ -83,7 +83,6 @@ resource "kubernetes_manifest" "consul_reference_grant" {
 resource "kubernetes_cluster_role_binding" "consul_auth_binding" {
   metadata {
     name      = "consul-auth-binding"
-    namespace = "consul"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -100,7 +99,6 @@ resource "kubernetes_cluster_role_binding" "consul_auth_binding" {
 resource "kubernetes_cluster_role_binding" "consul_api_gateway_tokenreview_binding" {
   metadata {
     name      = "consul-api-gateway-tokenreview-binding"
-    namespace = "consul"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -117,7 +115,6 @@ resource "kubernetes_cluster_role_binding" "consul_api_gateway_tokenreview_bindi
 resource "kubernetes_cluster_role" "consul_api_gateway_auth" {
   metadata {
     name      = "consul-api-gateway-auth"
-    namespace = "consul"
   }
   rule {
     api_groups = [""]
