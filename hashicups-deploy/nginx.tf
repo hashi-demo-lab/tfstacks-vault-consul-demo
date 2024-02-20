@@ -177,3 +177,38 @@ resource "consul_config_entry" "nginx_defaults" {
     kubernetes_service.nginx
   ]
 }
+
+resource "kubernetes_manifest" "api_gateway_route" {
+  manifest = {
+    apiVersion = "gateway.networking.k8s.io/v1beta1"
+    kind       = "HTTPRoute"
+    metadata = {
+      name      = "route-root"
+      namespace = "default"
+    }
+    spec = {
+      gatewayClassName = "consul"
+      parentRefs = [
+        {
+          name = "api-gateway"
+          namespace = "consul"
+        }
+      ]
+      rules = [
+        {
+          matches = {
+            path = {
+              type = "PathPrefix"
+              value = "/"
+            }
+          backendRefs = {
+            kind = "Service"
+            name = "nginx"
+            port = 80
+          }
+          }
+        }
+      ]
+    }
+  }
+}
