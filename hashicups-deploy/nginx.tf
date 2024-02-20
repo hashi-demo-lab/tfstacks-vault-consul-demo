@@ -184,10 +184,9 @@ resource "kubernetes_manifest" "api_gateway_route" {
     kind       = "HTTPRoute"
     metadata = {
       name      = "route-root"
-      namespace = "default"
+      namespace = "frontend"
     }
     spec = {
-      gatewayClassName = "consul"
       parentRefs = [
         {
           name = "api-gateway"
