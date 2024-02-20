@@ -39,3 +39,29 @@ resource "kubernetes_secret" "consul-client-secrets" {
     caCert              = var.client_ca_cert
   }
 }
+
+resource "kubernetes_manifest" "api_gateway" {
+  manifest = {
+    apiVersion = "gateway.networking.k8s.io/v1beta1"
+    kind       = "Gateway"
+    metadata = {
+      name      = "api-gateway"
+      namespace = kubernetes_namespace.consul.metadata.0.name
+    }
+    spec = {
+      gatewayClassName = "consul"
+      listeners = [
+        {
+          protocol = "HTTP"
+          port     = 80
+          name     = "http"
+          allowedRoutes = {
+            namespaces = {
+              from = "All"
+            }
+          }
+        },
+      ]
+    }
+  }
+}
