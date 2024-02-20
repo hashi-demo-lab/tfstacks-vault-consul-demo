@@ -129,7 +129,6 @@ resource "kubernetes_cluster_role" "consul_api_gateway_auth" {
 resource "kubernetes_cluster_role_binding" "consul_api_gateway_auth_binding" {
   metadata {
     name      = "consul-api-gateway-auth-binding"
-    namespace = "consul"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
