@@ -146,7 +146,7 @@ resource "consul_config_entry" "si-nginx" {
   config_json = jsonencode({
     Sources = [
       {
-        Namespace  = "default"
+        Namespace  = "consul"
         Action     = "allow"
         Name       = "api-gateway"
         Partition  = "default"
