@@ -108,35 +108,35 @@ resource "kubernetes_deployment" "nginx" {
 
 }
 
-resource "consul_config_entry" "ig-nginx" {
-  name        = "aws-default-ingress-gateway"
-  kind        = "ingress-gateway"
-  namespace   = "default"
+# resource "consul_config_entry" "ig-nginx" {
+#   name        = "aws-default-ingress-gateway"
+#   kind        = "ingress-gateway"
+#   namespace   = "default"
 
-  config_json = jsonencode({
-    Listeners = [
-      {
-        Port     = 80
-        Protocol = "http"
-        Services = [
-          { 
-            Name      = "nginx"
-            Namespace = "frontend" 
-            Hosts     = ["*"]
-            Partition = "default"
-          }
-        ]
-      }
-    ]
-    TLS = {
-    Enabled = false
-    }
-  })
+#   config_json = jsonencode({
+#     Listeners = [
+#       {
+#         Port     = 80
+#         Protocol = "http"
+#         Services = [
+#           { 
+#             Name      = "nginx"
+#             Namespace = "frontend" 
+#             Hosts     = ["*"]
+#             Partition = "default"
+#           }
+#         ]
+#       }
+#     ]
+#     TLS = {
+#     Enabled = false
+#     }
+#   })
 
-  depends_on = [
-    time_sleep.wait_5_seconds
-  ]
-}
+#   depends_on = [
+#     time_sleep.wait_5_seconds
+#   ]
+# }
 
 resource "consul_config_entry" "si-nginx" {
   name        = "nginx"
@@ -148,7 +148,7 @@ resource "consul_config_entry" "si-nginx" {
       {
         Namespace  = "default"
         Action     = "allow"
-        Name       = "aws-default-ingress-gateway"
+        Name       = "api-gateway"
         Partition  = "default"
         Precedence = 9
         Type       = "consul"
