@@ -1,15 +1,3 @@
-/* 
-data "kubernetes_service" "consul-ingress-gateway" {
-  metadata {
-    name = "consul-aws-default-ingress-gateway"
-    namespace = "consul"
-  }
-
-  depends_on = [
-    helm_release.consul-client
-  ]
-}
-*/
 
 resource "kubernetes_namespace" "consul" {
   metadata {
@@ -63,5 +51,94 @@ resource "kubernetes_manifest" "api_gateway" {
         },
       ]
     }
+  }
+}
+
+resource "kubernetes_manifest" "consul_reference_grant" {
+  manifest = {
+    apiVersion = "gateway.networking.k8s.io/v1alpha2"
+    kind       = "ReferenceGrant"
+    metadata = {
+      name      = "consul-reference-grant"
+      namespace = "default"
+    }
+    spec = {
+      from = [
+        {
+          group     = "gateway.networking.k8s.io"
+          kind      = "HTTPRoute"
+          namespace = "consul"
+        },
+      ]
+      to = [
+        {
+          group = ""
+          kind  = "Service"
+        },
+      ]
+    }
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "consul_auth_binding" {
+  metadata {
+    name      = "consul-auth-binding"
+    namespace = "consul"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "consul-api-gateway-auth"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "consul-server"
+    namespace = "consul"
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "consul_api_gateway_tokenreview_binding" {
+  metadata {
+    name      = "consul-api-gateway-tokenreview-binding"
+    namespace = "consul"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "system:auth-delegator"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "consul-api-gateway"
+    namespace = "consul"
+  }
+}
+
+resource "kubernetes_cluster_role" "consul_api_gateway_auth" {
+  metadata {
+    name      = "consul-api-gateway-auth"
+    namespace = "consul"
+  }
+  rule {
+    api_groups = [""]
+    resources  = ["serviceaccounts"]
+    verbs      = ["get"]
+  }
+}
+
+resource "kubernetes_cluster_role_binding" "consul_api_gateway_auth_binding" {
+  metadata {
+    name      = "consul-api-gateway-auth-binding"
+    namespace = "consul"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "consul-api-gateway-auth"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "consul-api-gateway"
+    namespace = "consul"
   }
 }
