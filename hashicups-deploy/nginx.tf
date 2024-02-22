@@ -146,7 +146,7 @@ resource "consul_config_entry" "si-nginx" {
   config_json = jsonencode({
     Sources = [
       {
-        Namespace  = "consul"
+        Namespace  = "frontend"
         Action     = "allow"
         Name       = "api-gateway"
         Partition  = "default"
@@ -190,24 +190,17 @@ resource "kubernetes_manifest" "route_root" {
       parentRefs = [
         {
           name      = "api-gateway"
-          namespace = "consul"
+          namespace = "frontend"
         },
       ]
       rules = [
         {
-          matches = [
-            {
-              path = {
-                type  = "PathPrefix"
-                value = "/"
-              }
-            },
-          ]
           backendRefs = [
             {
               kind = "Service"
               name = "nginx"
               port = 80
+              namespace = "frontend"
             },
           ]
         },
